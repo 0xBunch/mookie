@@ -1,0 +1,22 @@
+{{!< default}}
+
+<div class="main">
+    <main class="case-studies-page custom-scroll" data-simplebar>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" style="opacity: 0;">
+            <div class="case-studies-cards">
+                {{#get "posts" include="tags,authors" filter="tag:case-study" order="published_at desc"}}
+                    {{#foreach posts}}
+                        {{>case-studies/case-study-card}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            {{>subscribe-banner}}
+            {{>footer}}
+        </div>
+    </main>
+    {{>case-studies/case-studies-sidebar}}
+</div>

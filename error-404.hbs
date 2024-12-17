@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="light">
+
+    <head>
+         {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{meta_title}}</title>
+
+        {{!-- Dark Mode Script --}}
+        <script>
+            const rootElem = document.querySelector("html[data-theme]");
+
+            const detectSystemTheme = () => {
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    rootElem.setAttribute("data-theme", "dark");
+                } else {
+                    rootElem.setAttribute("data-theme", "light");
+                }
+            };
+
+            const initTheme = () => {
+                const localStoragePref = localStorage.getItem("data-theme");
+
+                if (localStoragePref) {
+                    rootElem.setAttribute("data-theme", localStoragePref);
+                } else {
+                    detectSystemTheme();
+                }
+            };
+
+            initTheme();
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", () => {
+                    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                        rootElem.setAttribute("data-theme", "dark");
+                    } else {
+                        rootElem.setAttribute("data-theme", "light");
+                    }
+                });
+        </script>
+
+        {{!-- Loading Fonts, Fonts Variables Declarations --}}
+        {{>font-pairings}}
+
+        {{!-- Main Styles --}}
+        <link rel="stylesheet" href="{{asset "built/main.css"}}">
+
+        {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
+        it should always be the last tag before the closing head tag --}}
+        {{ghost_head}}
+    </head>
+
+    <body class="{{body_class}}">
+        <main class="service-page page-404">
+            <div class="service-page__head">
+                <div class="page-head">
+                    <a href="/" aria-label="{{t "Back"}}" class="page-head__btn">
+                        {{>icons/back-icon}}
+                    </a>
+                    <span class="page-head__name">{{t "Back"}}</span>
+                </div>
+                {{>site-logo}}
+            </div>
+            {{#if @custom.page_background_image}}
+            <picture class="service-page__bg-img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url @custom.page_background_image size="3600" format="webp" }} 3600w,
+                    {{img_url @custom.page_background_image size="2800" format="webp" }} 2800w,
+                    {{img_url @custom.page_background_image size="2400" format="webp" }} 2400w,
+                    {{img_url @custom.page_background_image size="2000" format="webp" }} 2000w,
+                    {{img_url @custom.page_background_image size="1600" format="webp" }} 1600w,
+                    {{img_url @custom.page_background_image size="1200" format="webp" }} 1200w,
+                    {{img_url @custom.page_background_image size="960" format="webp" }} 960w,
+                    {{img_url @custom.page_background_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.page_background_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.page_background_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.page_background_image size="300" format="webp" }} 300w"
+                    sizes="100vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.page_background_image size="3600"}} 3600w,
+                    {{img_url @custom.page_background_image size="2800"}} 2800w,
+                    {{img_url @custom.page_background_image size="2400"}} 2400w,
+                    {{img_url @custom.page_background_image size="2000"}} 2000w,
+                    {{img_url @custom.page_background_image size="1600"}} 1600w,
+                    {{img_url @custom.page_background_image size="1200"}} 1200w,
+                    {{img_url @custom.page_background_image size="960"}} 960w,
+                    {{img_url @custom.page_background_image size="720"}} 720w,
+                    {{img_url @custom.page_background_image size="480"}} 480w,
+                    {{img_url @custom.page_background_image size="400"}} 400w,
+                    {{img_url @custom.page_background_image size="300"}} 300w"
+                    sizes="100vw"
+                    src="{{img_url @custom.page_background_image size="3600"}}"
+                alt="{{t "page background-image"}}"
+                class="service-page__bg-img">
+            </picture>
+            {{/if}}
+            <div class="page-404__wrapper">
+                <div class="page-404__icon-wrapper">
+                    {{>icons/error-page-icon}}
+                </div>
+                <h1 class="page-404__title">{{t "Page Not Found"}}</h1>
+                <p class="page-404__text">
+                    {{t "Uh oh! The page you are looking for doesn't exist or has been moved. Try retracing your steps or going back home."}}
+                </p>
+                <a href="{{@site.url}}" class="btn" aria-label="{{t "Home Page Link"}}">
+                    {{t "Back To Homepage"}}
+                    {{>icons/button-icon}}
+                </a>
+            </div>
+        </main>
+
+        {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the closing body tag --}}
+        {{ghost_foot}}
+    </body>
+
+</html>

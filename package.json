@@ -1,0 +1,195 @@
+{
+  "name": "principle",
+  "description": "A next-gen Ghost theme that delivers smooth, reload-free browsing for any blog type.",
+  "version": "1.0.3",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "license": "MIT",
+  "screenshots": {
+    "desktop": "assets/screenshot_desktop.webp",
+    "mobile": "assets/screenshot_mobile.webp"
+  },
+  "scripts": {
+    "dev": "rollup -c --environment BUILD:development -w",
+    "build": "rollup -c --environment BUILD:production",
+    "zip": "npm run build && bestzip $npm_package_name.zip assets/* locales/* partials/* members/* *.hbs package.json rollup.config.js README.md",
+    "test": "npx gscan .",
+    "pretest": "npm run build"
+  },
+  "author": {
+    "name": "HighFiveThemes",
+    "email": "hello@highfivethemes.com",
+    "url": "https://highfivethemes.com"
+  },
+  "gpm": {
+    "type": "theme",
+    "categories": [
+      "Beautiful",
+      "Clean",
+      "Minimal",
+      "Blog"
+    ]
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme"
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "bestzip": "^2.2.1",
+    "postcss": "^8.4.38",
+    "postcss-preset-env": "^8.0.1",
+    "rollup": "^4.18.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-scss": "^4.0.0",
+    "sass": "^1.77.6"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "config": {
+    "posts_per_page": 12,
+    "image_sizes": {
+      "100": {
+        "width": 100
+      },
+      "150": {
+        "width": 150
+      },
+      "300": {
+        "width": 300
+      },
+      "400": {
+        "width": 400
+      },
+      "480": {
+        "width": 480
+      },
+      "720": {
+        "width": 720
+      },
+      "960": {
+        "width": 960
+      },
+      "1200": {
+        "width": 1200
+      },
+      "1600": {
+        "width": 1600
+      },
+      "2000": {
+        "width": 2000
+      },
+      "2400": {
+        "width": 2400
+      },
+      "2800": {
+        "width": 2800
+      },
+      "3600": {
+        "width": 3600
+      }
+    },
+    "card_assets": true,
+    "custom": {
+      "dark_mode_logo": {
+        "type": "image",
+        "description": "Add a logo that will appear in dark theme mode."
+      },
+      "resize_logo": {
+        "type": "image",
+        "description": "Add a logo that will appear when the navbar be folded."
+      },
+      "resize_dark_mode_logo": {
+        "type": "image",
+        "description": "Add a logo that will appear when the navbar be folded in dark theme mode."
+      },
+      "subscribe_cta_text": {
+        "type": "text",
+        "description": "Enter CTA text that will be shown in Subscribe banner on Homepage.",
+        "group": "homepage"
+      },
+      "subscribe_cta_subtext": {
+        "type": "text",
+        "description": "Enter text that will be shown above input in Subscribe banner on Homepage.",
+        "group": "homepage"
+      },
+      "membership_section_title": {
+        "type": "text",
+        "description": "Enter title that will be shown in membership section on homepage.",
+        "group": "homepage"
+      },
+      "membership_section_description": {
+        "type": "text",
+        "description": "Enter description that will be shown in membership section on homepage.",
+        "group": "homepage"
+      },
+      "sidebar_adv_banner_text": {
+        "type": "text",
+        "description": "Enter text that will be shown in sidebar banner on homepage.",
+        "group": "homepage"
+      },
+      "sidebar_adv_banner_image": {
+        "type": "image"
+      },
+      "sidebar_adv_banner_link": {
+        "type": "text",
+        "description": "Please provide an advertising link",
+        "group": "homepage"
+      },
+      "sidebar_subscribe_banner_title": {
+        "type": "text",
+        "description": "Enter title that will be shown in sidebar banner on authors, categories, tag, membership page.",
+        "group": "homepage"
+      },
+      "sidebar_subscribe_banner_text": {
+        "type": "text",
+        "description": "Enter text that will be shown in sidebar banner on authors, categories, tag, membership page.",
+        "group": "homepage"
+      },
+      "sidebar_subscribe_banner_image": {
+        "type": "image"
+      },
+      "page_background_image": {
+        "type": "image",
+        "description": "Background image for pages such as 404 page, sign in/sign up/subscribe pages."
+      },
+      "formspree_endpoint": {
+        "type": "text",
+        "description": "Enter endpoint for contact page, which is indicated in your account on the site formspree.io",
+        "group": "homepage"
+      },
+      "header_type": {
+        "type": "select",
+        "description": "Select the header type.",
+        "options": [
+          "Header with logo",
+          "Header with author"
+        ],
+        "default": "Header with logo"
+      },
+      "sidebar_contact_form_title": {
+        "type": "text",
+        "description": "Enter a title for the contact form in sidebar."
+      },
+      "sidebar_contact_form_text": {
+        "type": "text",
+        "description": "Enter a text for the contact form in sidebar."
+      }
+    }
+  },
+  "dependencies": {
+    "imagesloaded": "^5.0.0",
+    "masonry-layout": "^4.2.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "simplebar": "^6.2.7"
+  }
+}

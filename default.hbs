@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="light">
+
+    <head>
+        {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{meta_title}}</title>
+
+        {{log meta_title}}
+
+         {{!-- Dark Mode Script --}}
+        <script>
+            let headerState = localStorage.getItem('header-state') == 'resize' ? 'resize' : 'no-resize'
+            document.documentElement.setAttribute("header-state", headerState)
+            
+            const rootElem = document.querySelector("html[data-theme]");
+
+            const detectSystemTheme = () => {
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    rootElem.setAttribute("data-theme", "dark");
+                } else {
+                    rootElem.setAttribute("data-theme", "light");
+                }
+            };
+
+            const initTheme = () => {
+                const localStoragePref = localStorage.getItem("data-theme");
+
+                if (localStoragePref) {
+                    rootElem.setAttribute("data-theme", localStoragePref);
+                } else {
+                    detectSystemTheme();
+                }
+            };
+
+            initTheme();
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", () => {
+                    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                        rootElem.setAttribute("data-theme", "dark");
+                    } else {
+                        rootElem.setAttribute("data-theme", "light");
+                    }
+                });
+        </script>
+
+        {{!-- Loading Fonts, Fonts Variables Declarations --}}
+        {{>font-pairings}}
+
+        {{!-- Styles --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css">
+        <link rel="stylesheet" href="{{asset "built/main.css"}}">
+
+        {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
+        it should always be the last tag before the closing head tag --}}
+        {{ghost_head}}
+    </head>
+
+    <body class="{{body_class}}">
+        <div class="wrapper">
+            {{!-- Website's Header --}}
+            {{>header}}
+            {{>mobile-header}}
+
+            {{!-- All other templates get inserted here, index.hbs, post.hbs, etc (except Error and Form pages) --}}
+            {{{body}}}
+            {{>mobile-nav}}
+        </div>
+        {{>header-popup}}
+
+        {{!-- Scripts --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/umd/photoswipe.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/umd/photoswipe-lightbox.umd.min.js"></script>
+
+        <script src="{{asset 'built/main.js'}}" defer></script>
+
+        {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the closing body tag --}}
+        {{ghost_foot}}
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{{!< default}}
+
+<div class="main">
+    {{#post}}
+        <main class="{{post_class}} post-page custom-scroll" data-simplebar>
+            {{>case-study/case-study-head}}
+            <div class="post-content">
+                {{content}}
+            </div>
+            {{>post-page/share-block}}
+            {{>case-study/read-next-section}}
+            {{>subscribe-banner}}
+            {{>footer}}
+        </main>
+        {{>case-study/case-study-sidebar}}
+    {{/post}}
+</div>
+
+

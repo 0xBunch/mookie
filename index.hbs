@@ -1,0 +1,35 @@
+{{!< default}}
+
+<div class="main">
+    <main class="main-content custom-scroll" data-simplebar>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" style="opacity: 0;">
+            {{>main-section/main-header}}
+            <div class="main-content__posts">
+                <div class="gutter-sizer"></div>
+                {{#foreach posts}}
+                    {{>post-card/board-post}} 
+                {{/foreach}}
+            </div>
+            {{#match pagination.next "!=" null}}
+                {{>button btnType="loadMore"}}
+            {{/match}}
+
+            {{>main-section/membership}}
+            
+            <div class="sidebar__posts">
+                <h4 class="sidebar__title">{{t "Featured Posts"}}</h4>
+                {{#get "posts" limit = 4 include="tags,authors" order="published_at desc" filter="featured:true"}}
+                    {{#foreach posts}}
+                        {{>sidebar/sidebar-list-post}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+            {{>subscribe-banner}}
+            {{>footer}}
+        </div>
+    </main>
+    {{>sidebar/sidebar showFilter="true" advBanner="true"}}
+</div>

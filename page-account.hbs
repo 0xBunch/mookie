@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="light">
+
+    <head>
+         {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{meta_title}}</title>
+
+        {{!-- Dark Mode Script --}}
+        <script>
+            const rootElem = document.querySelector("html[data-theme]");
+
+            const detectSystemTheme = () => {
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    rootElem.setAttribute("data-theme", "dark");
+                } else {
+                    rootElem.setAttribute("data-theme", "light");
+                }
+            };
+
+            const initTheme = () => {
+                const localStoragePref = localStorage.getItem("data-theme");
+
+                if (localStoragePref) {
+                    rootElem.setAttribute("data-theme", localStoragePref);
+                } else {
+                    detectSystemTheme();
+                }
+            };
+
+            initTheme();
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", () => {
+                    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                        rootElem.setAttribute("data-theme", "dark");
+                    } else {
+                        rootElem.setAttribute("data-theme", "light");
+                    }
+                });
+        </script>
+
+        {{!-- Loading Fonts, Fonts Variables Declarations --}}
+        {{>font-pairings}}
+
+        {{!-- Main Styles --}}
+        <link rel="stylesheet" href="{{asset "built/main.css"}}">
+
+        {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
+        it should always be the last tag before the closing head tag --}}
+        {{ghost_head}}
+    </head>
+
+    <body class="{{body_class}}">
+        <main class="service-page">
+            <div class="service-page__head">
+                <div class="page-head">
+                    <a href="/" aria-label="{{t "Back"}}" class="page-head__btn">
+                        {{>icons/back-icon}}
+                    </a>
+                    <span class="page-head__name">{{t "Back"}}</span>
+                </div>
+                {{>site-logo}}
+            </div>
+            {{#if @custom.page_background_image}}
+            <picture class="service-page__bg-img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url @custom.page_background_image size="3600" format="webp" }} 3600w,
+                    {{img_url @custom.page_background_image size="2800" format="webp" }} 2800w,
+                    {{img_url @custom.page_background_image size="2400" format="webp" }} 2400w,
+                    {{img_url @custom.page_background_image size="2000" format="webp" }} 2000w,
+                    {{img_url @custom.page_background_image size="1600" format="webp" }} 1600w,
+                    {{img_url @custom.page_background_image size="1200" format="webp" }} 1200w,
+                    {{img_url @custom.page_background_image size="960" format="webp" }} 960w,
+                    {{img_url @custom.page_background_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.page_background_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.page_background_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.page_background_image size="300" format="webp" }} 300w"
+                    sizes="100vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.page_background_image size="3600"}} 3600w,
+                    {{img_url @custom.page_background_image size="2800"}} 2800w,
+                    {{img_url @custom.page_background_image size="2400"}} 2400w,
+                    {{img_url @custom.page_background_image size="2000"}} 2000w,
+                    {{img_url @custom.page_background_image size="1600"}} 1600w,
+                    {{img_url @custom.page_background_image size="1200"}} 1200w,
+                    {{img_url @custom.page_background_image size="960"}} 960w,
+                    {{img_url @custom.page_background_image size="720"}} 720w,
+                    {{img_url @custom.page_background_image size="480"}} 480w,
+                    {{img_url @custom.page_background_image size="400"}} 400w,
+                    {{img_url @custom.page_background_image size="300"}} 300w"
+                    sizes="100vw"
+                    src="{{img_url @custom.page_background_image size="3600"}}"
+                alt="{{t "page background-image"}}"
+                class="service-page__bg-img">
+            </picture>
+            {{/if}}
+            <div class="account">
+            <div class="account__header">
+                {{#if @member.paid}}
+                    {{#foreach @member.subscriptions}}
+                        {{#if avatar_image}}
+                            <picture>
+                                <source 
+                                srcset="{{img_url avatar_image size="300" format="webp"}} 300w, 
+                                {{img_url avatar_image size="150" format="webp"}} 150w" 
+                                sizes="(max-width:600px) 80px, 148px"  type="image/webp">
+                                <img class="account__image" 
+                                srcset="{{img_url avatar_image size="300"}} 300w, 
+                                {{img_url avatar_image size="150"}} 150w" 
+                                sizes="(max-width:600px) 80px, 148px" 
+                                src="{{img_url avatar_image size="300"}}"
+                                alt="{{primary_author.name}} {{t "Profile image"}}">
+                            </picture>
+                        {{else}}
+                            <div class="account__image account__image--default">
+                                {{>icons/author-default-icon}}
+                            </div>
+                        {{/if}}
+                    {{/foreach}}
+                    <button aria-label="{{t "Log Out"}}" class="logout-btn" data-members-signout>
+                        {{>icons/logout-icon}}
+                        <span>{{t "Log Out"}}</span>
+                    </button>
+                {{else}}
+                    <div class="account__image account__image--default">
+                        {{>icons/author-default-icon}}
+                    </div>
+                {{/if}}
+            </div>
+            <div class="account__info">
+                <span class="account__name">{{@member.name}}</span>
+                {{#if @member.paid}}
+                    {{#foreach @member.subscriptions}}
+                        <p class="account__desc">
+                            {{t "Hey"}}, {{@member.firstname}}! {{t "You have an"}} <strong>{{status}} {{plan.nickname}}</strong> {{t "account with access to all areas. Get in touch if you have any problems or need some help getting things updated, and thanks for subscribing."}}
+                        </p>
+                    {{/foreach}}
+                {{else}}
+                    <p class="account__desc">
+                        {{t "Hey"}}, {{@member.firstname}}! {{t "You have an active free account. Get in touch if you have any problems or need some help getting things updated, and thanks for subscribing."}}
+                    </p>
+                {{/if}}
+                <button aria-label="{{t "Account Settings"}}" class="account__settings" data-portal="account">
+                    {{>icons/settings-icon}}
+                    <span>{{t "Account Settings"}}</span>
+                </button>
+                <div class="account-info">
+                    <div class="account-info__row">
+                        <div class="account-info-item">
+                            <span class="account-info-item__name">{{t "Email Address"}}</span>
+                            <span class="account-info-item__value">{{@member.email}}</span>
+                        </div>
+                        <div class="account-info-item">
+                            <span class="account-info-item__name">{{t "Your Plan"}}</span>
+                            <span class="account-info-item__value">{{#if @member.paid}}{{#foreach @member.subscriptions}}{{plan.nickname}}{{/foreach}}{{else}}{{t "Free"}}{{/if}}</span>
+                        </div>
+                    </div>
+                    {{#if @member.paid}}
+                        {{#foreach @member.subscriptions}}
+                        <div class="account-info__row">
+                            <div class="account-info-item">
+                                <span class="account-info-item__name">{{t "Card"}}</span>
+                                <div class="account-info-item__value">
+                                    {{>icons/dots-icon}}
+                                    {{default_payment_card_last4}}
+                                </div>
+                            </div>
+                            <div class="account-info-item">
+                                <span class="account-info-item__name">{{t "Next Bill Date"}}</span>
+                                <span class="account-info-item__value">{{date current_period_end format="DD MMMM YYYY"}}</span>
+                            </div>
+                        </div>
+                        {{/foreach}}
+                    {{/if}}
+                </div>
+                {{#if @member.paid}}
+                <div class="account__edit-btn">
+                    {{>button btnType="editBilling" btnText="Edit Billing Info"}}
+                    {{#foreach @member.subscriptions}} 
+                        {{cancel_link class="cancel-subscription-btn" cancelLabel="Cancel Subscription" continueLabel="Continue Subscription"}}  
+                    {{/foreach}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        </main>
+
+        {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the closing body tag --}}
+        {{ghost_foot}}
+    </body>
+
+</html>

@@ -1,0 +1,102 @@
+{{!< default}}
+
+<div class="main">
+    {{#post}}
+        <main class="{{post_class}} post-page custom-scroll" data-simplebar>
+            {{>post-page/post-head}}
+            <div class="post-content">
+                {{content}}
+            </div>
+            {{>post-page/share-block}}
+            
+            <div class="post-meta">
+                <span class="post-meta__text">
+                    {{t "Updated on"}}
+                    <time datetime="{{date format="YYYY-MM-DD"}}" class="post-date">
+                        {{date format="MMM D, YYYY"}}
+                    </time>
+                </span>
+                {{>post-tags showTags="true"}}
+            </div>
+
+            {{#if comments}}
+                <div class="post-comments">
+                    <h3 class="post-comments__title">
+                        {{>icons/comments-icon}}
+                        {{t "Comments"}}
+                    </h3>
+                    {{comments title="" mode="auto" saturation=0 count=false}}
+                </div>
+            {{/if}}
+
+            <div class="sidebar__authors">
+                <h4 class="sidebar__title">{{t "About Author"}}</h4>
+                {{#foreach authors}}
+                    <div class="sidebar-author-card">
+                        <div class="sidebar-author-card__info">
+                            {{#if profile_image}}
+                            <a href="{{@site.url}}{{url}}" class="sidebar-author-card__image-wrapper" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                                <picture>
+                                    <source srcset="
+                                    {{img_url profile_image size="150" format="webp" }} 150w" 
+                                        sizes="48px" type="image/webp">
+                                    <img class="sidebar-author-card__image" srcset="
+                                    {{img_url profile_image size="150"}} 150w" 
+                                        sizes="48px" src="{{img_url profile_image size="150"}}"
+                                        alt="{{name}} {{t "Profile image"}}" />
+                                </picture>
+                            </a>
+                            {{else}}
+                            <a href="{{@site.url}}{{url}}" class="sidebar-author-card__image-wrapper sidebar-author-card__image-wrapper--no-image" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                                {{>icons/author-default-icon}}
+                            </a>
+                            {{/if}}
+                            <a class="sidebar-author-card__name sidebar-author-card__{{slug}}" href="{{@site.url}}{{url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                                {{name}}
+                            </a>
+                        </div>
+                        {{#if bio}}
+                        <p class="sidebar-author-card__bio">
+                            {{bio}}
+                        </p>
+                        {{/if}}
+
+                        {{#has any="facebook, twitter, website"}}
+                            <div class="author-page__socials">
+                                {{#if facebook}}
+                                <a class="author-page__social-link" href="{{facebook_url}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "facebook link"}}">
+                                    <span>{{t "Facebook"}}</span>
+                                    {{>icons/social-link-icon}}
+                                </a>
+                                {{/if}}
+                                {{#if twitter}}
+                                <a class="author-page__social-link" href="{{twitter_url}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "twitter link"}}">
+                                    <span>{{t "Twitter"}}</span>
+                                    {{>icons/social-link-icon}}
+                                </a>
+                                {{/if}}
+                                {{#if website}}
+                                <a class="author-page__social-link" href="{{website}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "website link"}}">
+                                    <span>{{t "Website"}}</span>
+                                    {{>icons/social-link-icon}}
+                                </a>
+                                {{/if}}
+                            </div>
+                        {{/has}}
+                    </div>
+                {{/foreach}}
+                {{>sidebar/sidebar-adv-banner}}
+            </div>
+
+        
+        
+
+            {{>post-page/read-next-section}}
+            {{>subscribe-banner}}
+            {{>footer}}
+        </main>
+        {{>post-page/post-sidebar advBanner="true"}}
+</div>
+{{/post}}
+
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="light">
+
+   <head>
+        {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{meta_title}}</title>
+
+        {{!-- Dark Mode Script --}}
+        <script>
+            const rootElem = document.querySelector("html[data-theme]");
+
+            const detectSystemTheme = () => {
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    rootElem.setAttribute("data-theme", "dark");
+                } else {
+                    rootElem.setAttribute("data-theme", "light");
+                }
+            };
+
+            const initTheme = () => {
+                const localStoragePref = localStorage.getItem("data-theme");
+
+                if (localStoragePref) {
+                    rootElem.setAttribute("data-theme", localStoragePref);
+                } else {
+                    detectSystemTheme();
+                }
+            };
+
+            initTheme();
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", () => {
+                    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                        rootElem.setAttribute("data-theme", "dark");
+                    } else {
+                        rootElem.setAttribute("data-theme", "light");
+                    }
+                });
+        </script>
+
+        {{!-- Script that redirects logged in members to account page --}}
+        {{#if @member}}
+            <script>window.location = '{{@site.url}}/account/';</script>
+        {{/if}}
+
+        {{!-- Loading Fonts, Fonts Variables Declarations --}}
+        {{>font-pairings}}
+
+        {{!-- Main Styles --}}
+        <link rel="stylesheet" href="{{asset "built/main.css"}}">
+
+        {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
+        it should always be the last tag before the closing head tag --}}
+        {{ghost_head}}
+    </head>
+
+     <body class="{{body_class}}">
+        <main class="service-page form-page">
+            <div class="service-page__head">
+                <div class="page-head">
+                    <a href="/" aria-label="{{t "Back"}}" class="page-head__btn">
+                        {{>icons/back-icon}}
+                    </a>
+                    <span class="page-head__name">{{t "Back"}}</span>
+                </div>
+                {{>site-logo}}
+            </div>
+            {{#if @custom.page_background_image}}
+            <picture class="service-page__bg-img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url @custom.page_background_image size="3600" format="webp" }} 3600w,
+                    {{img_url @custom.page_background_image size="2800" format="webp" }} 2800w,
+                    {{img_url @custom.page_background_image size="2400" format="webp" }} 2400w,
+                    {{img_url @custom.page_background_image size="2000" format="webp" }} 2000w,
+                    {{img_url @custom.page_background_image size="1600" format="webp" }} 1600w,
+                    {{img_url @custom.page_background_image size="1200" format="webp" }} 1200w,
+                    {{img_url @custom.page_background_image size="960" format="webp" }} 960w,
+                    {{img_url @custom.page_background_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.page_background_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.page_background_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.page_background_image size="300" format="webp" }} 300w"
+                    sizes="100vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.page_background_image size="3600"}} 3600w,
+                    {{img_url @custom.page_background_image size="2800"}} 2800w,
+                    {{img_url @custom.page_background_image size="2400"}} 2400w,
+                    {{img_url @custom.page_background_image size="2000"}} 2000w,
+                    {{img_url @custom.page_background_image size="1600"}} 1600w,
+                    {{img_url @custom.page_background_image size="1200"}} 1200w,
+                    {{img_url @custom.page_background_image size="960"}} 960w,
+                    {{img_url @custom.page_background_image size="720"}} 720w,
+                    {{img_url @custom.page_background_image size="480"}} 480w,
+                    {{img_url @custom.page_background_image size="400"}} 400w,
+                    {{img_url @custom.page_background_image size="300"}} 300w"
+                    sizes="100vw"
+                    src="{{img_url @custom.page_background_image size="3600"}}"
+                alt="{{t "page background-image"}}"
+                class="service-page__bg-img">
+            </picture>
+            {{/if}}
+
+            {{#page}}
+                <form class="form" data-members-form="signup" data-members-autoredirect="false" novalidate>
+                    {{#if title}}
+                        <h1 class="form__title">{{title}}</h1>
+                    {{/if}}
+                    {{#if custom_excerpt}}
+                        <p class="form__excerpt">{{custom_excerpt}}</p>
+                    {{/if}}
+                        <div class="form__input-wrapper">
+                        <label class="form__input-label" for="name-input">{{t "Your Name"}}</label>
+                        <input class="form__input" data-members-name type="text" name="name-input" id="name-input" placeholder="Your Name" aria-label="{{t "Your Name"}}" required>
+                    </div>
+
+                    <div class="form__input-wrapper">
+                        <label class="form__input-label" for="email-input">{{t "Your Email Address"}}</label>
+                        <input class="form__input" data-members-email type="email" name="email-input" id="email-input" placeholder="{{t "Your Email Address"}}" aria-label="{{t "Your Email Address"}}" required>
+                    </div>
+
+                    <p class="form-error" data-members-error></p>
+
+                    {{>button btnText = "Sign Up" ariaLabel = "Sign Up" linkURL = ""}}
+                    
+                    {{#if @site.portal_signup_terms_html}}
+                        {{^if @site.portal_signup_checkbox_required}}
+                            <div class="form__terms">{{{@site.portal_signup_terms_html}}}</div>
+                        {{/if}}
+                    {{/if}}
+
+                    <div class="form-success">
+                        <div class="form-success__icon-wrapper">
+                            {{>icons/success-icon}}
+                        </div>
+                        <h2 class="form-success__title">
+                            {{t "Success! Now Check Your Email"}}
+                        </h2>
+                        <p class="form-success__text">
+                            {{t "To complete Sign In, click the confirmation link in your inbox. If it doesn’t arrive within 3 minutes, check your spam folder."}}
+                        </p>
+
+                        {{>button btnType = "link" btnText = "Ok, Thanks" ariaLabel = "Home Page Link" linkURL = ""}}
+                    </div>
+                </form>
+            {{/page}}  
+
+            <div class="form__question">
+                <div class="form__question-icon-wrapper">
+                    {{>icons/create-user-icon}}          
+                </div>
+                <div class="form__question-text-wrapper">
+                    <span class="form__question-text">{{t "Already have an account?"}}</span>
+                    <a href="{{@site.url}}/signin" aria-label="{{t "Sign In"}}" class="form__question-btn">
+                        {{t "Sign In"}}
+                        {{>icons/button-icon}}
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the closing body tag --}}
+        {{ghost_foot}}
+    </body>
+
+</html>

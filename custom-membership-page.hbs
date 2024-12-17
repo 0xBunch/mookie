@@ -1,0 +1,51 @@
+{{!< default}}
+
+<div class="main">
+    <main class="membership-page custom-scroll" data-simplebar>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" style="opacity: 0;">
+            {{#if @site.members_enabled}}
+                {{#page}}
+                    <div class="membership-page__head">
+                        <div class="membership-page__toggle-wrapper">
+                            <button class="membership-page__toggle-btn membership-page__toggle-btn--monthly" aria-label="{{t "Change to monthly button"}}">{{t "Monthly"}}</button>
+                            <button class="membership-page__toggle" aria-label="{{t "Monthly or yearly toggle button"}}"></button>
+                            <button class="membership-page__toggle-btn membership-page__toggle-btn--yearly" aria-label="{{t "Change to yearly button"}}">{{t "Yearly"}}</button>
+                        </div>
+                    </div>
+                {{/page}}
+                <div class="wrapper">
+                    {{#get "tiers" filter="visibility:public" include="monthly_price,yearly_price,benefits" limit="all" as |tiers|}}
+                        <div class="tiers">
+                            {{#foreach tiers}}
+                                {{>tier-card/tier-card member=../../member index=@index}}
+                            {{/foreach}}
+                        </div>
+                    {{/get}}
+                </div>
+
+                {{#unless @member}}
+                    <div class="membership-page__question">
+                        {{t "Already have an account?"}}
+                        <a href="{{@site.url}}/signin" aria-label="{{t "Sign In"}}" class="membership-page__question-btn">
+                            <span>{{t "Sign In"}}</span>
+                            {{>icons/button-icon}}
+                        </a>
+                    </div>
+                {{/unless}}
+
+                {{#page}}
+                <div class="post-content">
+                    {{content}}
+                </div>
+                {{/page}}
+            {{/if}}
+
+            {{>subscribe-banner}}
+            {{>footer}}
+        </div>
+    </main>
+    {{>sidebar/sidebar subscribeBanner="true"}}
+</div>

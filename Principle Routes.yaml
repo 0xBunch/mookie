@@ -1,0 +1,31 @@
+routes:
+  /:
+    controller: channel
+    filter: tag:-case-study+tag:-hash-author-content
+    template: index
+  /account/:
+    template: page-account
+  /archive/:
+    controller: channel
+    template: archive
+    data: page.archive
+    filter: tag:-hash-author-content
+  /author/:slug/:
+    controller: channel
+    template: author
+    data: page.slug
+    filter: tag:-hash-author-content
+  /case-studies/:
+    controller: channel
+    data: page.custom-case-studies-page
+    template: custom-case-studies-page
+    filter: tag:case-study
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+    filter: tag:-hash-author-content
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

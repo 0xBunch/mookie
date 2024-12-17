@@ -1,0 +1,51 @@
+{{!< default}}
+
+{{log this}}
+
+{{#match relativeUrl "=" "/tag/case-study/"}}
+    <div class="main">
+        <main class="case-studies-page custom-scroll" data-simplebar>
+            <div class="case-studies-cards">
+                {{#foreach posts}}
+                    {{>case-studies/case-study-card}}
+                {{/foreach}}
+            </div>
+
+            {{>subscribe-banner}}
+            {{>footer}}
+        </main>
+        {{>case-studies/case-studies-sidebar}}
+    </div>
+{{else}}
+    <div class="main">
+        <main class="tag-page custom-scroll" data-simplebar>
+            <div class="page-head">
+                {{#tag}}
+                <span class="page-head__name">{{name}}</span>
+                {{/tag}}
+                <div class="tag-page__posts-count">
+                    {{>icons/pencil-icon}}
+                    {{plural pagination.total empty="No posts" singular="% post" plural="% posts"}}
+                </div>
+            </div>
+             <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" style="opacity: 0;">
+            <div class="main-content__posts">
+                <div class="gutter-sizer"></div>
+                {{#foreach posts}}
+                    {{>post-card/list-post}}
+                {{/foreach}}
+            </div>
+            {{#match pagination.next "!=" null}}
+                {{>button btnType="loadMore"}}
+            {{/match}}
+
+            {{>subscribe-banner}}
+            {{>footer}}
+            </div>
+        </main>
+        {{>sidebar/sidebar subscribeBanner="true"}}
+    </div>
+{{/match}}

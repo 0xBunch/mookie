@@ -1,0 +1,67 @@
+{{!< default}}
+
+<div class="main">
+    <main class="authors-page custom-scroll" data-simplebar>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" style="opacity: 0;">
+            <div class="authors-cards">
+                {{#get "authors" limit="all"}}
+                    {{#foreach authors}}
+                        <div class="authors-cards__card">
+                            <div class="authors-cards__card-header">
+                                <div class="authors-cards__card-img-wrapper{{^if profile_image}} authors-cards__card-img-wrapper--no-img{{/if}}">
+                                    {{#if profile_image}}
+                                    <picture>
+                                        <source srcset="
+                                        {{img_url profile_image size="300" format="webp" }} 300w, 
+                                        {{img_url profile_image size="150" format="webp" }} 150w"
+                                            sizes="120px" type="image/webp">
+                                        <img class="authors-cards__card-img" 
+                                        srcset="
+                                        {{img_url profile_image size="300"}} 300w, 
+                                        {{img_url profile_image size="150"}} 150w"
+                                            sizes="120px" src="{{img_url profile_image size="300"}}"
+                                            alt="{{name}} {{t "Profile image"}}" />
+                                    </picture>
+                                    {{else}}
+                                        {{>icons/author-default-icon}}
+                                    {{/if}}
+                                </div>
+
+                                <div class="authors-cards__card-info">
+                                    <span class="authors-cards__card-name">
+                                        {{name}}
+                                    </span>
+                                    {{#if location}}
+                                        <div class="authors-cards__card-location">
+                                            {{>icons/location-icon}}
+                                            <span>{{location}}</span>
+                                        </div>
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                            <div class="authors-cards__card-footer">
+                                {{#if bio}}
+                                    <p class="authors-cards__card-bio">
+                                        {{bio}}
+                                    </p>
+                                {{/if}}
+                                <a href="{{@site.url}}{{url}}" class="authors-cards__card-btn">
+                                    {{t "Learn More"}}
+                                    {{>icons/button-icon}}
+                                </a>
+                            </div>
+                        </div>
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            {{>subscribe-banner}}
+            {{>footer}}
+        </div>
+    </main>
+    {{>sidebar/sidebar subscribeBanner="true"}}
+</div>
