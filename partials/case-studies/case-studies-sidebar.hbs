@@ -1,0 +1,49 @@
+<aside class="sidebar">
+    <div class="sidebar__wrapper custom-sidebar-scroll" data-simplebar>
+      {{#if @custom.formspree_endpoint}}
+        <div class="sidebar__contact-form">
+            <form class="sidebar__form" action="{{@custom.formspree_endpoint}}" method="POST">
+                {{#if @custom.sidebar_contact_form_title}}
+                <h3 class="sidebar__contact-title">{{@custom.sidebar_contact_form_title}}</h3>
+                {{/if}}
+                {{#if @custom.sidebar_contact_form_text}}
+                <p class="sidebar__contact-text">{{@custom.sidebar_contact_form_text}}</p>
+                {{/if}}
+                <label class="sidebar__input-label">Name:</label>
+                <input class="sidebar__input" type="text" name="name" placeholder="{{t "Your Name"}}" aria-label="{{t "Your Name"}}" required/>
+                <label class="sidebar__input-label">Email:</label>
+                <input class="sidebar__input" type="email" name="email" placeholder="{{t "Your Email Address"}}" aria-label="{{t "Your Email Address"}}" required/>
+                <label class="sidebar__input-label">Message:</label>
+                <input class="sidebar__input" name="message" placeholder="{{t "Your Message"}}" aria-label="{{t "Your Message"}}" required/>
+                {{>button btnText = "Submit Request" ariaLabel = "Submit Request"}}
+
+                <div class="sidebar__status sidebar__status--success">
+                    <div class="sidebar__status-icon">
+                        {{>icons/success-icon}}
+                    </div>
+                    <h3 class="sidebar__status-title">
+                        {{t "Success!"}}
+                    </h3>
+                    <p class="sidebar__status-text" id="sidebar-form-status"></p>
+                    <a class="btn" href="{{@site.url}}/{{slug}}" aria-label="{{t "{pageTitle} Page Link" pageTitle=title}}">
+                        <span class="btn-text">{{t "Ok, Thanks"}}</span>
+                    </a>
+                </div>
+                
+                <div class="sidebar__status sidebar__status--error">
+                    <div class="sidebar__status-icon">
+                        {{>icons/error-icon}}
+                    </div>
+                    <h3 class="sidebar__status-title">
+                        {{t "Oops, Something Went Wrong!"}}
+                    </h3>
+                    <p class="sidebar__status-text" id="sidebar-form-status"></p>
+                    <a class="btn" href="{{@site.url}}/{{slug}}" aria-label="{{t "{pageTitle} Page Link" pageTitle=title}}">
+                        <span class="btn-text">{{t "Try Again"}}</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+      {{/if}}
+    </div>
+</aside>

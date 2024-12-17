@@ -1,0 +1,296 @@
+.form {
+	background-color: var(--color-bg);
+	box-shadow: 0px 20px 60px 0px rgba(226, 66, 30, 0.05);
+
+	padding: 56px;
+
+	max-width: 494px;
+	width: 100%;
+
+	border: 1px solid var(--color-border);
+	border-radius: $border-radius-block;
+
+	transition: border-color $transition-time ease,
+		background-color $transition-time ease;
+
+	position: relative;
+
+	&__title {
+		@include font--titles-H3;
+		text-align: center;
+
+		max-width: 317px;
+		width: 100%;
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&__excerpt {
+		@include font--body-M;
+		text-align: center;
+
+		margin-top: 8px;
+
+		max-width: 317px;
+		width: 100%;
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&__input-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		margin-top: 24px;
+	}
+
+	&__input-label {
+		@include font--tabs;
+	}
+
+	&__input {
+		max-width: 388px;
+		width: 100%;
+		border-radius: $border-radius-inpt;
+
+		@include font--body-S;
+
+		border: 1px solid var(--color-border);
+
+		background-color: var(--color-bg-block);
+
+		color: var(--color-text);
+
+		padding: 9px 20px;
+
+		transition: border-color $transition-time ease;
+
+		&:focus {
+			border-color: var(--color-border--hover);
+		}
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				border-color: var(--color-border--hover);
+			}
+		}
+	}
+
+	&__question {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		flex-direction: column;
+
+		position: absolute;
+
+		bottom: 48px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	&__question-text-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	&__question-icon-wrapper {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 1px solid var(--color-border);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		background-color: var(--color-bg);
+
+		svg {
+			path {
+				stroke: var(--accent-color);
+			}
+		}
+	}
+
+	&__question-text {
+		@include font--subheading;
+		text-transform: uppercase;
+	}
+
+	&__question-btn {
+		@include font--buttons;
+		color: var(--accent-color);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+
+		transition: color $transition-time ease;
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: var(--color-text);
+				svg {
+					rotate: 45deg;
+					path {
+						stroke: var(--color-text);
+					}
+				}
+			}
+		}
+		svg {
+			transition: rotate $transition-time ease;
+			path {
+				transition: stroke $transition-time ease;
+				stroke: var(--accent-color);
+			}
+		}
+	}
+
+	&__terms {
+		margin-top: 8px;
+		@include font--body-XS;
+
+		a {
+			text-decoration: underline;
+			color: var(--color-text);
+			transition: opacity $transition-time ease;
+			@media (hover: hover) and (pointer: fine) {
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+
+	.btn {
+		margin-top: 24px;
+
+		.loader-icon {
+			visibility: hidden;
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.form-success {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 12px;
+
+		visibility: hidden;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		max-width: 317px;
+		width: 100%;
+
+		&__icon-wrapper {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: 1px solid var(--color-border);
+
+			flex-shrink: 0;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			background-color: var(--color-bg-block);
+		}
+
+		.btn {
+			margin-top: 0;
+		}
+
+		&__title {
+			@include font--titles-H3;
+			text-align: center;
+		}
+
+		&__text {
+			@include font--body-M;
+			text-align: center;
+		}
+	}
+
+	.form-error {
+		display: none;
+
+		@include font--body-XS;
+		color: var(--accent-color);
+	}
+
+	&.success {
+		.btn,
+		.form__excerpt,
+		.form__title,
+		.form__input-wrapper {
+			visibility: hidden;
+		}
+		.form-success {
+			visibility: visible;
+			.btn {
+				visibility: visible;
+			}
+		}
+	}
+
+	&.error {
+		.form-error {
+			display: block;
+		}
+		.btn {
+			margin-top: 5px;
+		}
+	}
+
+	&.loading {
+		.btn {
+			pointer-events: none;
+			.loader-icon {
+				visibility: visible;
+			}
+			.btn-text,
+			.btn-icon {
+				visibility: hidden;
+			}
+		}
+	}
+}
+
+:root[data-theme='dark'] {
+	.form {
+		box-shadow: none;
+	}
+}
+
+@media (max-width: 470px) {
+	.form {
+		padding: 32px;
+	}
+}
+
+@media (max-width: 375px) {
+	.form {
+		&__excerpt {
+			font-size: 14px;
+		}
+	}
+}

@@ -1,0 +1,43 @@
+{{#if @site.members_enabled}}
+{{#unless @member}}
+    {{#if @custom.subscribe_cta_text}}
+    <section class="subscribe-banner">
+        <form class="subscribe-banner-form" data-members-form="subscribe" data-members-autoredirect="false" novalidate>
+                <h1 class="subscribe-banner-form__title">{{@custom.subscribe_cta_text}}</h1>
+                {{#if @custom.subscribe_cta_subtext}}
+                <p class="subscribe-banner-form__text">{{@custom.subscribe_cta_subtext}}</p>
+                {{/if}}
+            <div class="subscribe-banner-form__input-wrapper">
+                <input class="subscribe-banner-form__input" data-members-email type="email" name="email-input" id="subscribe-banner-email-input" placeholder="{{t "Enter your email"}}" aria-label="{{t "Your email address"}}" required>
+                <button aria-label="{{t "Subscribe"}}" class="btn">
+                    <span>{{t "Subscribe"}}</span>
+                    {{>icons/button-icon}}
+                    {{>icons/loader-icon}}
+                </button>
+            </div>
+            <p class="subscribe-banner-form__error" data-members-error></p>
+            {{#if @site.portal_signup_terms_html}}
+                {{^if @site.portal_signup_checkbox_required}}
+                    <div class="subscribe-banner-terms">{{{@site.portal_signup_terms_html}}}</div>
+                {{/if}}
+            {{/if}}
+            <div class="subscribe-banner-form__success">
+                
+                <div class="subscribe-banner-form__success-icon-wrapper">
+                    {{>icons/success-icon}}
+                </div>
+                    
+                <p class="subscribe-banner-form__success-title">
+                    {{t "Success! Now Check Your Email"}}
+                </p>
+                
+                <p class="subscribe-banner-form__success-text">
+                    {{t "To complete Subscribe, click the confirmation link in your inbox. If
+                    it doesn’t arrive within 3 minutes, check your spam folder."}}
+                </p>
+            </div>
+        </form>
+    </section>
+    {{/if}}
+{{/unless}}
+{{/if}}  

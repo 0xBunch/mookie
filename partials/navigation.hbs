@@ -1,0 +1,49 @@
+{{#if isSecondary}}
+<ul class="nav-list nav-list--secondary">
+    {{#foreach navigation}}
+    <li class="nav-item nav-item--secondary{{#if current}} nav-item--current{{/if}}"><a href="{{url absolute="true"}}"
+            class="nav-item__link nav-item__link--secondary" aria-label="{{label}} {{t "Navigation link"}}">{{label}}</a></li>
+    {{/foreach}}
+</ul>
+{{else}}
+<nav class="nav">
+    <ul class="nav-list">
+        {{#foreach navigation}}
+            {{#match url "=" "#"}}
+                <li class="nav-submenu-item">
+                    <button class="nav-submenu-btn nav-submenu-btn__{{slug}}" data-menu-tooltip-content="{{label}}" aria-label="{{t "Open submenu"}} {{label}}" id="submenu-button-{{label}}-{{@index}}" data-menu-item="submenu__item">
+                        <span class="nav-submenu-btn__container">
+                            <span class="nav-submenu__first-char">{{label.[0]}}</span>
+                            <span class="nav-submenu__full-char">{{label}}</span>
+                            {{>icons/submenu-chevron-icon}}
+                        </span>
+                    </button>
+                    <ul class="submenu">
+            {{else match label.[0] "=" "-"}}
+                        <li class="submenu__item" data-menu-tooltip-content="{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}" data-menu-item="submenu__item">
+                            <a class="submenu__item-link" href="{{url absolute="true"}}" aria-label="{{label}} {{t "Navigation link"}}">
+                                <span class="nav-submenu__first-char">{{label.[2]}}</span>
+                                <span class="nav-submenu__full-char">{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}</span>
+                            </a>
+                       </li>
+            {{else match label.[0] "=" "+"}}
+                        <li class="submenu__item" data-menu-tooltip-content="{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}" data-menu-item="submenu__item">
+                            <a class="submenu__item-link" href="{{url absolute="true"}}" aria-label="{{label}} {{t "Navigation link"}}">
+                                <span class="nav-submenu__first-char">{{label.[2]}}</span>
+                                <span class="nav-submenu__full-char">{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}</span>
+                            </a>
+                       </li>
+                    </ul>
+                </li>
+            {{else}}
+                <li class="nav-item{{#if current}} nav-item--current{{/if}}" data-menu-tooltip-content="{{label}}" data-menu-item="nav-item">
+                    <a href="{{url absolute="true"}}" class="nav-item__link nav-item__{{slug}}" aria-label="{{label}} {{t "Navigation link"}}">
+                        <span class="nav-item__first-char">{{label.[0]}}</span>
+                        <span class="nav-item__full-char">{{label}}</span>
+                    </a>
+                </li>
+            {{/match}}
+        {{/foreach}}
+    </ul>
+</nav>
+{{/if}}

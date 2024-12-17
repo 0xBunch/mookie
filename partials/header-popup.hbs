@@ -1,0 +1,48 @@
+<div class="header-popup">
+    <div class="header-social-wrapper">
+        <div class="header-social">
+            {{#if @site.facebook}}
+                <a class="header-social__link" href={{facebook_url}} target="_blank" rel="noopener noreferrer" aria-label="{{@site.title}} {{t "facebook link"}}">
+                    <span>{{t "Facebook"}}</span>
+                    {{>icons/social-link-icon}}
+                </a>
+            {{/if}}
+            {{#if @site.twitter}}
+                <a class="header-social__link" href={{twitter_url}} target="_blank" rel="noopener noreferrer" aria-label="{{@site.title}} {{t "twitter link"}}">
+                    <span>{{t "X"}}</span>
+                    {{>icons/social-link-icon}}
+                </a>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="header-options">
+        {{#if @member}}
+            <a href="{{@site.url}}/account" class="btn" aria-label="{{t "Account page link"}}">
+                {{t "Account"}}
+            </a>
+        {{else}}
+            <a href="{{@site.url}}/signin" class="btn" aria-label="{{t "Sign In link"}}">
+                {{t "Sign In"}}
+                {{>icons/button-icon}}
+            </a>
+        {{/if}}
+
+        <a href="{{@site.url}}/signin" class="header-options__resize">
+            {{>icons/user-icon}}
+        </a>
+        <div class="header-options__elements">
+            <button class="search-btn" title="{{t "Search button"}}" aria-label="{{t "Search button"}}" data-ghost-search>
+                {{>icons/search-icon}}
+            </button>
+            <button class="switch-theme-btn" aria-label="{{t "Dark mode toggle button"}}" data-menu-tooltip-content="{{t "Light mode/Dark mode"}}" data-menu-item="switch-theme__item">
+                <span class="switch-theme-btn__mod switch-theme-btn__mod--light" >
+                    {{>icons/sun-icon}}
+                </span>
+                <span class="switch-theme-btn__mod switch-theme-btn__mod--dark">
+                    {{>icons/moon-icon}}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

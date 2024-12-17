@@ -1,0 +1,25 @@
+<div class="mobile-nav-wrapper">
+    <ul class="mobile-nav">
+        {{#foreach navigation}}
+            {{#match url "=" "#"}}
+            {{else match label.[0] "=" "-"}}
+            {{else match label.[0] "=" "+"}}
+            {{else}}
+                <li class="mobile-nav__item{{#if current}} mobile-nav__item--current{{/if}}" data-nav-slug="{{slug}}">
+                    <a class="mobile-nav__item-link nav-item__{{slug}}" href="{{url absolute="true"}}">{{label}}</a>
+                </li>
+            {{/match}}
+        {{/foreach}}
+        <li class="mobile-nav__more-items">
+            <button class="mobile-nav__more-items-btn">
+                <span class="mobile-nav__more-items-btn-icons">
+                    {{>icons/more-icon}}
+                    {{>icons/more-icon}}
+                    {{>icons/more-icon}}
+                </span>
+                <span>{{t "More"}}</span>
+            </button>
+        </li>
+    </ul>
+</div>
+{{>mobile-menu}}

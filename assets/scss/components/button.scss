@@ -1,0 +1,120 @@
+.btn {
+  background: var(--linear-gradient);
+  padding: 11.5px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  @include font--buttons;
+  color: white;
+
+  border-radius: $border-radius-btn;
+
+  position: relative;
+
+  flex-shrink: 0;
+
+  transition: opacity $transition-time ease, background-color $transition-time ease;
+
+  &:focus-visible {
+    outline: auto;
+    outline-color: var(--color-text);
+  }
+
+  &::after {
+    content: '';
+
+    border-radius: $border-radius-btn;
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
+
+    transition: all 0.3s ease;
+  }
+
+  .loader-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+  }
+
+  svg {
+    transition-property: rotate;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+    opacity: 60%;
+    flex-shrink: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+      svg {
+        rotate: 45deg;
+      }
+
+      .loader-icon {
+        rotate: unset;
+      }
+    }
+  }
+}
+
+.load-more-btn {
+  width: fit-content;
+
+  margin: 0 auto;
+  margin-top: 40px;
+
+  &:hover {
+    svg {
+      rotate: 0deg;
+    }
+  }
+  &.loading {
+    pointer-events: none;
+    .loader-icon {
+      visibility: visible;
+    }
+    span,
+    svg {
+      visibility: hidden;
+    }
+  }
+}
+
+.edit-billing-button {
+  margin-top: 0;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      svg {
+        rotate: 0deg;
+      }
+    }
+  }
+
+  &.loading {
+    pointer-events: none;
+    .loader-icon {
+      visibility: visible;
+    }
+    span,
+    svg {
+      visibility: hidden;
+    }
+  }
+}

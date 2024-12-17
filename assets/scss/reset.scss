@@ -1,0 +1,179 @@
+/* Reset
+/* ---------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+ * Sets the root font-size to 62.5% of the browser's default font size.
+ * This is done to allow for easy scaling of the entire project.
+ * 
+ * For example, if 1rem is set to 62.5%, then 16px is equivalent to 1rem.
+ * This makes it easier to manage the font-size of the entire project.
+ */
+:root {
+  /* Set the root font-size to 62.5% of the browser's default font size. */
+  font-size: 62.5%;
+}
+
+html {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
+}
+
+body {
+  max-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-size: 1.6rem;
+  font-family: var(--font-family);
+  font-style: normal;
+  transition: background-color $transition-time ease, color $transition-time ease;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p,
+ul,
+ol,
+li,
+dl,
+dd,
+hr,
+pre,
+form,
+table,
+video,
+figure,
+figcaption,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 60px var(--color-bg-block) inset !important;
+  -webkit-text-fill-color: var(--color-text);
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+label {
+  display: block;
+}
+
+::selection {
+  text-shadow: none;
+  background: #cbeafb;
+}
+
+mark {
+  background-color: #06f;
+}
+
+small {
+  font-size: 80%;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  border: none;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+a {
+  color: var(--color-text);
+  transition: color $transition-time ease;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline;
+  &:focus,
+  &:focus-visible {
+    outline: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-titles);
+  font-style: normal;
+  margin: 0;
+  transition: color $transition-time ease;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,32 @@
+<div class="share-block">
+    <span class="share-block__text">
+        {{t "Share"}}
+    </span>
+    <div class="share-block__btns">
+        <a class="share-btn"
+            href="https://www.facebook.com/sharer.php?u={{url absolute='true'}}" target="_blank" rel="noopener"
+            aria-label="{{t "Share on Facebook"}}">
+            {{t "Facebook"}}
+        </a>
+        <a class="share-btn"
+            href="https://twitter.com/intent/tweet?url={{url absolute='true'}}&amp;text={{encode title}}" target="_blank"
+            rel="noopener" aria-label="{{t "Share on Twitter"}}">
+            {{t "X"}}
+        </a>
+        <a class="share-btn"
+            href="https://reddit.com/submit?url={{url absolute='true'}}&amp;media=&amp;description={{encode title}}"
+            target="_blank" rel="noopener" data-pin-do="none" aria-label="{{t "Share on Reddit"}}">
+            {{t "Reddit"}}
+        </a>
+        <button class="share-btn copyToClipboardBtn" aria-label="{{t "Copy to clipboard button"}}">
+            {{>icons/copy-link-icon}}
+            <span>
+                {{t "Copy Link"}}
+            </span>
+            <div class="copyToClipboardBtn__tooltip">
+                <span class="copyToClipboardBtn__tooltip-copied">{{t "Link copied!"}}</span>
+                <span class="copyToClipboardBtn__tooltip-not-copied">{{t "Copy failed!"}}</span>
+            </div>
+        </button>
+    </div>
+</div>

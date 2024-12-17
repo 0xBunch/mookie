@@ -1,0 +1,22 @@
+{{#match btnType "=" 'loadMore'}}
+    <a rel="next" name="{{buttonName}}" class="btn load-more-btn{{classNames}}" aria-label="{{t "Load more button"}}">
+        <span>{{t "Load More"}}</span>
+        {{>icons/loader-icon}}
+    </a>
+{{else match btnType "=" 'editBilling'}}
+    <button aria-label="{{t "Edit Billing Info"}}" class="btn edit-billing-button" data-members-edit-billing>
+        <span class="btn-text">{{t btnText}}</span>
+        {{>icons/loader-icon}}
+    </button>
+{{else match btnType "=" 'link'}}
+    <a class="btn{{classNames}}" href="{{@site.url}}/{{linkURL}}" aria-label="{{t ariaLabel}}">
+        <span>{{t btnText}}</span>
+       {{>icons/button-icon}}
+    </a>
+{{else}}
+    <button aria-label="{{t ariaLabel}}" class="btn{{classNames}}">
+       <span class="btn-text">{{t btnText}}</span>
+       {{>icons/button-icon}}
+       {{>icons/loader-icon}}
+    </button>
+{{/match}}

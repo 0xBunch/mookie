@@ -1,0 +1,145 @@
+.filter {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	width: 100%;
+	padding: 32px;
+
+	position: relative;
+
+	&::before {
+		content: '';
+
+		position: absolute;
+
+		bottom: 0;
+		left: 32px;
+		right: 32px;
+
+		height: 1px;
+
+		background-color: var(--color-border--hover);
+		transition: background-color $transition-time ease;
+	}
+
+	&.loading {
+		.filter__tag {
+			pointer-events: none;
+		}
+		.filter__tag-name {
+			opacity: 0.5;
+		}
+	}
+
+	&__loader {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 9999; /* Чтобы перекрывал весь контент */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		visibility: hidden;
+
+		background-color: transparent;
+	}
+
+	&__spinner {
+		border: 2px solid transparent;
+		border-top: 2px solid var(--accent-color);
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		animation: spin 1s linear infinite;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+	}
+
+	&__title {
+		@include font--subheading;
+		text-transform: uppercase;
+	}
+
+	&__clear-btn {
+		visibility: hidden;
+
+		@include font--buttons;
+
+		background: var(--linear-gradient);
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+
+		transition: opacity $transition-time ease;
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+	}
+
+	&__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+	}
+
+	&__tag {
+		padding: 8px 16px;
+		height: 34px;
+		gap: 3px;
+		align-items: center;
+
+		position: relative;
+
+		transition: border-color $transition-time ease,
+			background-color $transition-time ease;
+
+		cursor: pointer;
+
+		&.active {
+			padding-right: 11px;
+			svg {
+				display: block;
+			}
+			& {
+				border-color: #dfcdc6;
+				background-color: #f8f6f5;
+			}
+		}
+
+		svg {
+			display: none;
+		}
+
+		&.loading {
+			.filter__loader {
+				visibility: visible;
+			}
+		}
+	}
+}
+
+:root[data-theme='dark'] {
+	.filter__clear-btn {
+		color: var(--color-text);
+		-webkit-text-fill-color: unset;
+	}
+	.filter {
+		&__tag {
+			&.active {
+				& {
+					border-color: #6f6f6f;
+					background-color: #353535;
+				}
+			}
+		}
+	}
+}

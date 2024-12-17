@@ -1,0 +1,289 @@
+// VARIABLES
+// -------------------------------------------------------------------------
+
+// COLORS
+// -------------------------------------------------------------------------
+
+// --ghost-accent-color - Ghost CMS accent color variable;
+// --secondary-color - secondary
+// --main-background-color - user's variable from Code Injection;
+// --text-color - user's variable from Code Injection;
+// --border-color - user's variable from Code Injection;
+// --block-background-color - user's variable from Code Injection;
+// --border-color-hover - user's variable from Code Injection;
+// --color-current-nav-page - user's variable from Code Injection;
+// --color-linear-gradient - user's variable from Code Injection;
+
+html {
+	&[data-theme='light'] {
+		--accent-color: var(--ghost-accent-color, #212121);
+		--secondary-color: var(--secondary-color, #f5f5f5);
+		--color-bg: var(--main-background-color, #ffffff);
+		--color-text: var(--text-color, #0d0d0d);
+		--color-border: var(--border-color, #ede6e3);
+		--color-bg-block: var(--block-background-color, #f8f6f5);
+
+		--color-border--hover: var(--border-color-hover, #dfcdc6);
+		--color-secondary-foreground: #757575;
+		--color-cur-nav-page: var(--color-current-nav-page, #f9f3f2);
+
+		--linear-gradient: var(
+			--color-linear-gradient,
+			linear-gradient(
+				0deg,
+				rgba(223, 60, 24, 1) 0%,
+				rgba(255, 121, 91, 1) 100%,
+				var(--accent-color)
+			)
+		);
+	}
+
+	&[data-theme='dark'] {
+		--accent-color: var(--accent-color--dark-mode, #ededed);
+		--secondary-color: var(--secondary-color--dark-mode, #3d3d3d);
+		--color-bg: var(--main-background-color--dark-mode, #1d1d1f);
+		--color-text: var(--text-color, #ededed);
+		--color-border: var(--border-color, #343435);
+		--color-bg-block: var(--block-background-color, #29292a);
+
+		--color-border--hover: var(--border-color-hover, #515151);
+		--color-secondary-foreground: #757575;
+		--color-cur-nav-page: var(--color-current-nav-page, #343435);
+
+		--linear-gradient: #343435;
+	}
+}
+
+//APPEAR ANIMATION TIME AND EASING
+// -------------------------------------------------------------------------
+
+$anim-time: 0.8s;
+$anim-easing: linear(
+	0,
+	0.2342,
+	0.4374,
+	0.6093 37.49%,
+	0.6835,
+	0.7499,
+	0.8086,
+	0.8593,
+	0.9023,
+	0.9375,
+	0.9648,
+	0.9844,
+	0.9961,
+	1
+);
+
+// TRANSITIONS
+// -------------------------------------------------------------------------
+
+$transition-time: 0.3s;
+
+// BORDER-RADIUS
+// -------------------------------------------------------------------------
+
+// --border-radius-images - user's variable from Code Injection;
+// --border-radius-blocks - user's variable from Code Injection;
+// --border-radius-buttons-and-inputs - user's variable from Code Injection;
+// --border-radius-navigation - user's variable from Code Injection;
+// --border-radius-submenus - user's variable from Code Injection;
+// --border-radius-tags-and-icons - user's variable from Code Injection;
+// --border-radius-social-icons - user's variable from Code Injection;
+
+$border-radius-btn: var(--border-radius-button, 6px);
+$border-radius-inpt: var(--border-radius-input, 6px);
+$border-radius-tag: var(--border-radius-tags, 100px);
+$border-radius-tag-icons: var(--border-radius-tag-icons, 50%);
+$border-radius-img: var(--border-radius-images, 8px);
+$border-radius-block: var(--border-radius-blocks, 8px);
+$border-radius-section: var(--border-radius-section, 16px);
+$border-radius-nav: var(--border-radius-navigation, 6px);
+$border-radius-date-block: var(--border-radius-date-blocks, 4px);
+
+// FONTS
+// -------------------------------------------------------------------------
+
+// TITLES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--titles-H1 {
+	font-family: var(--font-family);
+	font-size: var(--h1-font-size);
+	font-weight: var(--font-weight-titles);
+	line-height: var(--h1-line-height);
+	letter-spacing: var(--h1-letter-spacing);
+}
+
+@mixin font--titles-H2 {
+	font-family: var(--font-family);
+	font-size: var(--h2-font-size);
+	font-weight: var(--font-weight-titles);
+	line-height: var(--h2-line-height);
+	letter-spacing: var(--h2-letter-spacing);
+}
+
+@mixin font--titles-H3 {
+	font-family: var(--font-family);
+	font-size: var(--h3-font-size);
+	font-weight: var(--font-weight-titles);
+	line-height: var(--h3-line-height);
+	letter-spacing: var(--h3-letter-spacing);
+}
+
+@mixin font--titles-H4 {
+	font-family: var(--font-family);
+	font-size: var(--h4-font-size);
+	font-weight: var(--font-weight-titles);
+	line-height: var(--h4-line-height);
+	letter-spacing: var(--h4-letter-spacing);
+}
+
+@mixin font--titles-H5 {
+	font-family: var(--font-family);
+	font-size: var(--h5-font-size);
+	font-weight: var(--font-weight-titles);
+	line-height: var(--h5-line-height);
+	letter-spacing: var(--h5-letter-spacing);
+}
+
+// BODY
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--body-M {
+	font-family: var(--font-family);
+	font-size: var(--body-M-font-size);
+	font-weight: var(--font-weight-body);
+	line-height: var(--body-M-line-height);
+	letter-spacing: var(--body-M-letter-spacing);
+}
+
+@mixin font--body-S {
+	font-family: var(--font-family);
+	font-size: var(--body-S-font-size);
+	font-weight: var(--font-weight-body);
+	line-height: var(--body-S-line-height);
+	letter-spacing: var(--body-S-letter-spacing);
+}
+
+@mixin font--body-XS {
+	font-family: var(--font-family);
+	font-size: var(--body-XS-font-size);
+	font-weight: var(--body-XS-font-weight);
+	line-height: var(--body-XS-line-height);
+	letter-spacing: var(--body-XS-letter-spacing);
+}
+
+// SUBHEADING
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--subheading {
+	font-family: var(--font-family);
+	font-size: var(--subheading-font-size);
+	font-weight: var(--subheading-font-weight);
+	line-height: var(--subheading-line-height);
+	letter-spacing: var(--subheading-letter-spacing);
+}
+
+// BUTTON
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--buttons {
+	font-family: var(--font-family);
+	font-size: var(--button-font-size);
+	font-weight: var(--button-font-weight);
+	line-height: var(--button-line-height);
+	letter-spacing: var(--button-letter-spacing);
+}
+
+// TAGS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--tags {
+	font-family: var(--font-family);
+	font-size: var(--tags-font-size);
+	font-weight: var(--tags-font-weight);
+	line-height: var(--tags-line-height);
+	letter-spacing: var(--tags-letter-spacing);
+}
+
+// TABS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--tabs {
+	font-family: var(--font-family);
+	font-size: var(--tabs-font-size);
+	font-weight: var(--tabs-font-weight);
+	line-height: var(--tabs-line-height);
+	letter-spacing: var(--tabs-letter-spacing);
+}
+
+// AUTHORS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--authors {
+	font-family: var(--font-family);
+	font-size: var(--author-font-size);
+	font-weight: var(--author-font-weight);
+	line-height: var(--author-line-height);
+	letter-spacing: var(--author-letter-spacing);
+}
+
+// DATE
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--date {
+	font-family: var(--font-family);
+	font-size: var(--date-font-size);
+	font-weight: var(--date-font-weight);
+	line-height: var(--date-line-height);
+	letter-spacing: var(--date-letter-spacing);
+}
+
+// SEMI-14
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--semi-14 {
+	font-family: var(--font-family);
+	font-size: var(--semi-14-font-size);
+	font-weight: var(--semi-14-font-weight);
+	line-height: var(--semi-14-line-height);
+	letter-spacing: var(--semi-14-letter-spacing);
+}
+
+// MEDIUM-14
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--medium-14 {
+	font-family: var(--font-family);
+	font-size: var(--medium-14-font-size);
+	font-weight: var(--medium-14-font-weight);
+	line-height: var(--medium-14-line-height);
+	letter-spacing: var(--medium-14-letter-spacing);
+}
+
+// SEMI-12
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin font--semi-12 {
+	font-family: var(--font-family);
+	font-size: var(--semi-12-font-size);
+	font-weight: var(--semi-12-font-weight);
+	line-height: var(--semi-12-line-height);
+	letter-spacing: var(--semi-12-letter-spacing);
+}
+
+// DEFAUL SCROLL DISABLE
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@mixin default-scroll-disable {
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

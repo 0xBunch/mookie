@@ -1,0 +1,30 @@
+<div class="sidebar-subscribe-banner">
+    <div class="sidebar-subscribe-banner__banner">
+        <h4 class="sidebar-subscribe-banner__title">{{@custom.sidebar_subscribe_banner_title}}</h4>
+        <span class="sidebar-subscribe-banner__text">{{@custom.sidebar_subscribe_banner_text}}</span>
+        <a href="{{@site.url}}/membership" aria-label="{{t "Become a Member"}}" class="btn">
+            <span>{{t "Become a Member"}}</span>
+            {{>icons/button-icon}}
+        </a>
+        <picture class="sidebar-subscribe-banner__img-wrapper">
+            <source 
+                    srcset=" 
+                    {{img_url @custom.sidebar_subscribe_banner_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="300" format="webp" }} 300w"
+                    sizes="18vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.sidebar_subscribe_banner_image size="720"}} 720w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="480"}} 480w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="400"}} 400w,
+                    {{img_url @custom.sidebar_subscribe_banner_image size="300"}} 300w"
+                    sizes="18vw"
+                    src="{{img_url @custom.sidebar_subscribe_banner_image size="720"}}"
+                alt="{{t "sidebar banner image"}}"
+                class="sidebar-subscribe-banner__img">
+        </picture>
+    </div>
+</div>

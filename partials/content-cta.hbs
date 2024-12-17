@@ -1,0 +1,53 @@
+{{{html}}}
+<div class="post-upgrade-cta">
+    <div class="post-upgrade-cta-content">
+        {{#has visibility="paid"}}
+            <h2 class="post-upgrade-cta-title">{{t "This post is for paying subscribers only"}}</h2>
+        {{/has}}
+        {{#has visibility="members"}}
+            <h2 class="post-upgrade-cta-title">{{t "This post is for subscribers only"}}</h2>
+        {{/has}}
+        {{#has visibility="tiers"}}
+            <h2 class="post-upgrade-cta-title">{{t "This post is for subscribers on the"}} {{tiers}} {{t "only"}}</h2>
+        {{/has}}
+        {{#if @member}}
+            {{#if @site.portal_button}}
+            <a class="btn" href="#/portal/account/plans" aria-label="{{t "Upgrade your account"}}">
+                {{t "Upgrade your account"}}
+                {{>icons/button-icon}}
+            </a>
+            {{else}}
+            <a class="btn" href="/membership" aria-label="{{t "Upgrade your account"}}">
+                {{t "Upgrade your account"}}
+                {{>icons/button-icon}}
+            </a>
+            {{/if}}
+        {{else}}
+            {{#if @site.portal_button}}
+            <a class="btn" href="#/portal/signup" aria-label="{{t "Subscribe"}}">
+                {{t "Subscribe Now"}}
+                {{>icons/button-icon}}
+            </a>
+            <p class="post-upgrade-cta-small-text">
+                <span>{{t "Already have an account?"}}</span> 
+                <a class="post-upgrade-cta-signin" href="#/portal/signin" aria-label="{{t "Sign In"}}">
+                {{t "Sign In"}}
+                {{>icons/button-icon}}
+                </a>
+            </p>
+            {{else}}
+            <a class="btn" href="/signup" aria-label="{{t "Subscribe"}}">
+                {{t "Subscribe Now"}}
+                {{>icons/button-icon}}
+            </a>
+            <p class="post-upgrade-cta-small-text">
+                <span>{{t "Already have an account?"}}</span> 
+                <a class="post-upgrade-cta-signin" href="/signin" aria-label="{{t "Sign In"}}">
+                {{t "Sign In"}}
+                {{>icons/button-icon}}
+                </a>
+            </p>
+            {{/if}}
+        {{/if}}
+    </div>
+</div>

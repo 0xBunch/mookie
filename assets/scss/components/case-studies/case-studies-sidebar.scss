@@ -1,0 +1,137 @@
+.sidebar {
+  &__contact-form {
+    padding: 32px;
+  }
+  &__contact-title {
+    @include font--titles-H4;
+    margin-bottom: 6px;
+  }
+
+  &__contact-text {
+    @include font--body-S;
+  }
+
+  &__form {
+    &.loading {
+      .btn {
+        display: flex;
+        .loader-icon {
+          visibility: visible;
+        }
+        .btn-text,
+        .btn-icon {
+          visibility: hidden;
+        }
+      }
+    }
+
+    &.success {
+      .sidebar__status--success {
+        display: block;
+        .btn {
+          display: flex;
+        }
+      }
+      .btn,
+      .sidebar__input,
+      .sidebar__input-label,
+      .sidebar__contact-text,
+      .sidebar__contact-title {
+        display: none;
+      }
+    }
+
+    &.error {
+      .sidebar__status--error {
+        display: block;
+        .btn {
+          display: flex;
+        }
+      }
+      .btn,
+      .sidebar__input,
+      .sidebar__input-label,
+      .sidebar__contact-text,
+      .sidebar__contact-title {
+        display: none;
+      }
+    }
+  }
+
+  &__input-label {
+    &:first-of-type {
+      margin-top: 20px;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+    @include font--tabs;
+
+    & ~ .sidebar__input-label {
+      margin-top: 24px;
+    }
+  }
+
+  &__input {
+    max-width: 388px;
+    width: 100%;
+    border-radius: $border-radius-inpt;
+
+    @include font--body-S;
+
+    border: 1px solid var(--color-border);
+
+    background-color: var(--color-bg-block);
+
+    margin-top: 10px;
+
+    padding: 9px 20px;
+
+    transition: border-color $transition-time ease, background-color $transition-time ease;
+
+    &:focus {
+      border-color: var(--color-border--hover);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-border--hover);
+      }
+    }
+  }
+
+  .btn {
+    margin-top: 24px;
+    width: fit-content;
+  }
+
+  &__status {
+    display: none;
+  }
+
+  &__status-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+
+    background-color: var(--color-bg-block);
+
+    transition: border-color $transition-time ease, background-color $transition-time ease;
+  }
+
+  &__status-title {
+    @include font--titles-H4;
+    margin-top: 16px;
+  }
+
+  &__status-text {
+    @include font--body-S;
+    margin-top: 8px;
+  }
+}

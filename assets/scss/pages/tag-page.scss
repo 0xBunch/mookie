@@ -1,0 +1,35 @@
+.tag-page {
+	flex-grow: 1;
+
+	display: flex;
+
+	@include default-scroll-disable;
+
+	&__posts-count {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		gap: 4px;
+
+		padding: 5px 8px;
+
+		@include font--subheading;
+
+		background-color: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: $border-radius-date-block;
+		line-height: 1;
+
+		margin-left: auto;
+
+		transition: background-color $transition-time ease,
+			border-color $transition-time ease;
+
+		svg {
+			path {
+				stroke: var(--accent-color);
+			}
+		}
+	}
+}

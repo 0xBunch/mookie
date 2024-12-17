@@ -1,0 +1,131 @@
+.post-content {
+  .post-upgrade-cta {
+    position: relative;
+
+    &:not(:first-child):after {
+      background-color: var(--color-bg);
+      box-shadow: 0 0 110px 110px var(--color-bg);
+      content: '';
+      height: 1px;
+      left: 0;
+      right: 0;
+      position: absolute;
+      top: -1px;
+      transition: box-shadow 0.35s ease, background-color 0.35s ease;
+    }
+  }
+
+  .post-upgrade-cta-content {
+    border-radius: $border-radius-block;
+    background-color: #0d0d0d;
+    padding: 40px;
+
+    position: relative;
+
+    z-index: 5;
+  }
+
+  .btn {
+    height: 40px;
+    margin-top: 24px !important;
+    color: #fff !important;
+    font-family: var(--font-family) !important;
+    font-size: var(--button-font-size) !important;
+    font-weight: var(--button-font-weight) !important;
+    line-height: var(--button-line-height) !important;
+    letter-spacing: var(--button-letter-spacing) !important;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-size: unset !important;
+      }
+    }
+  }
+
+  .post-upgrade-cta-signin {
+    transition: opacity $transition-time ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .post-upgrade-cta-title {
+    @include font--titles-H3;
+
+    margin: 0 auto;
+    color: #fff;
+
+    text-align: center;
+  }
+
+  .post-upgrade-cta-content {
+    .btn {
+      display: flex !important;
+      width: fit-content !important;
+      gap: 4px !important;
+
+      margin: 0 auto;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+    }
+  }
+
+  .post-upgrade-cta-small-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 16px;
+    margin-bottom: 0;
+    @include font--subheading;
+    text-transform: uppercase;
+    color: #b6b6b6;
+  }
+
+  .post-upgrade-cta-signin {
+    @include font--buttons;
+    color: #fff;
+    text-transform: capitalize;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    transition: opacity $transition-time ease;
+
+    svg {
+      transition: rotate $transition-time ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        svg {
+          rotate: 45deg;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .post-content {
+    .post-upgrade-cta-content {
+      padding: 32px;
+    }
+    .post-upgrade-cta-title {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .post-content {
+    .post-upgrade-cta-content {
+      padding: 28px;
+    }
+    .post-upgrade-cta-title {
+      font-size: 18px;
+    }
+  }
+}

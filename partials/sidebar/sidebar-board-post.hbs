@@ -1,0 +1,62 @@
+<article class="sidebar-board-post" data-post-id="{{id}}">
+    {{#if feature_image}}
+        <a class="sidebar-board-post__img-link" href="{{url}}" aria-label="{{t "post image link"}}">
+            <time class="sidebar-board-post__date" datetime="{{date format='YYYY-MM-DD'}}">
+                {{date format="MMMM D, YYYY"}}
+            </time>   
+            <picture class="sidebar-board-post__img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url feature_image size="720" format="webp" }} 720w,
+                    {{img_url feature_image size="480" format="webp" }} 480w,
+                    {{img_url feature_image size="400" format="webp" }} 400w,
+                    {{img_url feature_image size="300" format="webp" }} 300w"
+                    sizes="16vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url feature_image size="720"}} 720w,
+                    {{img_url feature_image size="480"}} 480w,
+                    {{img_url feature_image size="400"}} 400w,
+                    {{img_url feature_image size="300"}} 300w"
+                    sizes="16vw"
+                    src="{{img_url feature_image size="720"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}} {{t "Feature image"}}{{/if}}"
+                class="sidebar-board-post__img">
+            </picture>
+        </a>
+    {{else}}
+        <a href="{{url}}" class="sidebar-board-post__img-link sidebar-board-post__no-img-link" aria-label="{{t "post image link"}}">
+            <time class="sidebar-board-post__date" datetime="{{date format='YYYY-MM-DD'}}">
+                {{date format="MMMM D, YYYY"}}
+            </time> 
+            {{#if @site.logo}}
+                {{#if @custom.dark_mode_logo}}
+                <img src="{{img_url @custom.dark_mode_logo}}" alt="{{@site.title}} {{t "logo"}}" class="sidebar-board-post__no-image sidebar-board-post__no-image--dark-logo"/>
+                {{/if}}
+                <img src="{{img_url @site.logo}}" alt="{{@site.title}} {{t "logo"}}" class="sidebar-board-post__no-image sidebar-board-post__no-image--light-logo"/>
+            {{else}}
+                <h3 class="sidebar-board-post__no-image-title">{{@site.title}}</h3>
+            {{/if}}
+        </a>
+    {{/if}}
+
+    <div class="sidebar-board-post__content">
+        {{#if authors}}
+            <div class="sidebar-board-post__authors">
+                {{#foreach authors}}
+                    <a href="{{url}}" class="sidebar-board-post__author" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                        {{name}}
+                    </a>
+                {{/foreach}}
+            </div>
+        {{/if}}
+
+        <h4 class="sidebar-board-post__title">
+            <a href="{{url}}" class="sidebar-board-post__title-link">
+                {{title}}
+            </a>
+        </h4>
+        {{>post-tags showTags="true"}}    
+    </div>
+</article>

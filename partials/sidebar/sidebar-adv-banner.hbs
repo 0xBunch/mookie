@@ -1,0 +1,52 @@
+<div class="sidebar-adv-banner">
+    <h4 class="sidebar__title">{{t "Sponsored Ad"}}</h4>
+    {{#if @custom.sidebar_adv_banner_link}}
+        <a href="{{@custom.sidebar_adv_banner_link}}" target="_blank" class="sidebar-adv-banner__banner sidebar-adv-banner__banner--link" aria-label="{{t "sidebar advertising link"}}">
+            <span class="sidebar-adv-banner__text">{{@custom.sidebar_adv_banner_text}}</span>
+            <picture class="sidebar-adv-banner__img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url @custom.sidebar_adv_banner_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.sidebar_adv_banner_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.sidebar_adv_banner_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.sidebar_adv_banner_image size="300" format="webp" }} 300w"
+                    sizes="18vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.sidebar_adv_banner_image size="720"}} 720w,
+                    {{img_url @custom.sidebar_adv_banner_image size="480"}} 480w,
+                    {{img_url @custom.sidebar_adv_banner_image size="400"}} 400w,
+                    {{img_url @custom.sidebar_adv_banner_image size="300"}} 300w"
+                    sizes="18vw"
+                    src="{{img_url @custom.sidebar_adv_banner_image size="720"}}"
+                alt="{{t "sidebar banner image"}}"
+                class="sidebar-adv-banner__img">
+            </picture>
+        </a>
+    {{else}}
+        <div class="sidebar-adv-banner__banner">
+            <span class="sidebar-adv-banner__text">{{@custom.sidebar_adv_banner_text}}</span>
+            <picture class="sidebar-adv-banner__img-wrapper">
+                <source 
+                    srcset=" 
+                    {{img_url @custom.sidebar_adv_banner_image size="720" format="webp" }} 720w,
+                    {{img_url @custom.sidebar_adv_banner_image size="480" format="webp" }} 480w,
+                    {{img_url @custom.sidebar_adv_banner_image size="400" format="webp" }} 400w,
+                    {{img_url @custom.sidebar_adv_banner_image size="300" format="webp" }} 300w"
+                    sizes="18vw"
+                    type="image/webp">
+                    <img 
+                    srcset="
+                    {{img_url @custom.sidebar_adv_banner_image size="720"}} 720w,
+                    {{img_url @custom.sidebar_adv_banner_image size="480"}} 480w,
+                    {{img_url @custom.sidebar_adv_banner_image size="400"}} 400w,
+                    {{img_url @custom.sidebar_adv_banner_image size="300"}} 300w"
+                    sizes="18vw"
+                    src="{{img_url @custom.sidebar_adv_banner_image size="720"}}"
+                alt="{{t "sidebar banner image"}}"
+                class="sidebar-adv-banner__img">
+            </picture>
+        </div>
+    {{/if}}
+</div>

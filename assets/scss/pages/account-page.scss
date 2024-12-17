@@ -1,0 +1,265 @@
+.page-account {
+  .service-page {
+    flex-direction: column;
+    gap: 24px;
+    &__head {
+      position: relative;
+      top: unset;
+      left: unset;
+      right: unset;
+      width: 100%;
+    }
+    .logo {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.logout-btn,
+.account__settings {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  @include font--buttons;
+  line-height: 1;
+
+  color: var(--color-secondary-foreground);
+  transition: opacity $transition-time ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  svg {
+    path {
+      stroke: var(--color-secondary-foreground);
+    }
+  }
+}
+
+.account {
+  background-color: var(--color-bg);
+  box-shadow: 0px 20px 60px 0px rgba(226, 66, 30, 0.05);
+
+  padding: 56px;
+
+  width: 100%;
+
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-block;
+  &__header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__image {
+    width: 120px;
+    height: 120px;
+    display: block;
+    object-fit: cover;
+    border-radius: $border-radius-img;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--default {
+      border-radius: $border-radius-block;
+      border: 1px solid var(--color-border);
+
+      transition: border-color $transition-time ease;
+
+      svg {
+        path {
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  &__name {
+    @include font--titles-H4;
+  }
+
+  &__desc {
+    @include font--body-M;
+  }
+
+  .btn {
+    width: fit-content;
+  }
+
+  &__edit-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .gh-error-subscription-cancel {
+      display: none;
+    }
+
+    &:has(.error) {
+      .gh-error-subscription-cancel {
+        display: block;
+      }
+    }
+  }
+
+  .account-info {
+    padding: 24px 0;
+    display: flex;
+    gap: 24px;
+
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      height: 1px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: var(--color-text);
+      opacity: 0.2;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+
+    &__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+    }
+  }
+
+  .account-info-item {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__name {
+      color: var(--color-text);
+
+      @include font--tags;
+
+      transition: color $transition-time ease;
+    }
+
+    &__value {
+      color: var(--color-text);
+
+      @include font--body-S;
+
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      transition: color $transition-time ease;
+
+      svg {
+        circle {
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+}
+
+.cancel-subscription-btn {
+  color: var(--color-text);
+  @include font--buttons;
+
+  &.error {
+    color: red;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: #fe4b4b;
+      }
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+}
+
+.gh-error-subscription-cancel {
+  @include font--buttons;
+  color: red;
+  transition: color $transition-time ease;
+}
+
+.account-buttons {
+  padding-top: 40px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  .gh-error-subscription-cancel {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    color: red;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+:root[data-theme='dark'] {
+  .account {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .service-page {
+    justify-content: flex-start;
+  }
+  .account {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 32px;
+    &__image {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .account-info {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 375px) {
+  .account {
+    padding: 24px;
+  }
+}

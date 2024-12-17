@@ -1,0 +1,73 @@
+<aside class="sidebar">
+    <div class="sidebar__wrapper custom-sidebar-scroll" data-simplebar>
+        <div class="sidebar__toc-wrapper">
+            <h4 class="sidebar__title">{{t "On This Page"}}</h4>
+            <ul class="sidebar-toc"></ul>
+        </div>
+        <div class="sidebar__authors">
+            <h4 class="sidebar__title">{{t "About Author"}}</h4>
+            {{#foreach authors}}
+                <div class="sidebar-author-card">
+                    <div class="sidebar-author-card__info">
+                        {{#if profile_image}}
+                        <a href="{{@site.url}}{{url}}" class="sidebar-author-card__image-wrapper" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            <picture>
+                                <source srcset="
+                                {{img_url profile_image size="150" format="webp" }} 150w" 
+                                    sizes="48px" type="image/webp">
+                                <img class="sidebar-author-card__image" srcset="
+                                {{img_url profile_image size="150"}} 150w" 
+                                    sizes="48px" src="{{img_url profile_image size="150"}}"
+                                    alt="{{name}} {{t "Profile image"}}" />
+                            </picture>
+                        </a>
+                        {{else}}
+                        <a href="{{@site.url}}{{url}}" class="sidebar-author-card__image-wrapper sidebar-author-card__image-wrapper--no-image" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{>icons/author-default-icon}}
+                        </a>
+                        {{/if}}
+                        <a class="sidebar-author-card__name sidebar-author-card__{{slug}}" href="{{@site.url}}{{url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{name}}
+                        </a>
+                    </div>
+                    {{#if bio}}
+                    <p class="sidebar-author-card__bio">
+                        {{bio}}
+                    </p>
+                    {{/if}}
+
+                    {{#has any="facebook, twitter, website"}}
+                        <div class="author-page__socials">
+                            {{#if facebook}}
+                            <a class="author-page__social-link" href="{{facebook_url}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "facebook link"}}">
+                                <span>{{t "Facebook"}}</span>
+                                {{>icons/social-link-icon}}
+                            </a>
+                            {{/if}}
+                            {{#if twitter}}
+                            <a class="author-page__social-link" href="{{twitter_url}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "twitter link"}}">
+                                <span>{{t "Twitter"}}</span>
+                                {{>icons/social-link-icon}}
+                            </a>
+                            {{/if}}
+                            {{#if website}}
+                            <a class="author-page__social-link" href="{{website}}" target="_blank" rel="noopener" aria-label="{{name}}'s {{t "website link"}}">
+                                <span>{{t "Website"}}</span>
+                                {{>icons/social-link-icon}}
+                            </a>
+                            {{/if}}
+                        </div>
+                    {{/has}}
+                </div>
+            {{/foreach}}
+        </div>
+
+        {{#match advBanner "=" "true"}}
+            {{>sidebar/sidebar-adv-banner}}
+        {{/match}}
+
+        {{#match subscribeBanner "=" "true"}}
+            {{>sidebar/sidebar-subscribe-banner}}
+        {{/match}}
+    </div>
+</aside>

@@ -1,0 +1,38 @@
+<aside class="sidebar">
+    <div class="sidebar__wrapper custom-sidebar-scroll" data-simplebar>
+        {{#match showFilter "=" "true"}}
+            {{>sidebar/filter}}
+        {{/match}}
+
+        {{#match showAuthorPosts "=" "true"}}
+            <div class="sidebar__posts">
+                <h4 class="sidebar__title">{{t "Posts"}}</h4>
+                {{#foreach posts}}
+                    {{^has tag="#author-content, Case Study"}}
+                        {{>sidebar/sidebar-board-post}}
+                    {{/has}}
+                {{/foreach}}
+            </div>
+            {{#match pagination.next "!=" null}}
+                {{>button btnType="loadMore"}}
+            {{/match}}
+        {{else}}
+            <div class="sidebar__posts">
+                <h4 class="sidebar__title">{{t "Featured Posts"}}</h4>
+                {{#get "posts" limit = 4 include="tags,authors" order="published_at desc" filter="featured:true"}}
+                    {{#foreach posts}}
+                        {{>sidebar/sidebar-list-post}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+        {{/match}}
+
+        {{#match advBanner "=" "true"}}
+            {{>sidebar/sidebar-adv-banner}}
+        {{/match}}
+
+        {{#match subscribeBanner "=" "true"}}
+            {{>sidebar/sidebar-subscribe-banner}}
+        {{/match}}
+    </div>
+</aside>

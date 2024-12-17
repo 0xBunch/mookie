@@ -1,0 +1,141 @@
+<header class="post-header{{#if featured}} post-header--featured{{else}} post-header--simple{{/if}}">
+    {{#if featured}}
+    <div class="post-header__overlay{{#if feature_image}} post-header__overlay--with-img{{else}} post-header__overlay--without-img{{/if}}">
+        {{#if feature_image}}
+            <picture class="post-header__img-wrapper">
+                <source 
+                srcset=" 
+                    {{img_url feature_image size="2400" format="webp" }} 2400w, 
+                    {{img_url feature_image size="2000" format="webp" }} 2000w, 
+                    {{img_url feature_image size="1600" format="webp" }} 1600w, 
+                    {{img_url feature_image size="1200" format="webp" }} 1200w, 
+                    {{img_url feature_image size="960" format="webp" }} 960w, 
+                    {{img_url feature_image size="720" format="webp" }} 720w, 
+                    {{img_url feature_image size="480" format="webp" }} 480w, 
+                    {{img_url feature_image size="400" format="webp" }} 400w"
+                    sizes="(max-width: 750px) 100vw, (max-width: 1100px) 73vw, 60vw" 
+                    type="image/webp">
+                <img class="post-header__img" 
+                srcset="
+                    {{img_url feature_image size="2400" }} 2400w, 
+                    {{img_url feature_image size="2000" }} 2000w, 
+                    {{img_url feature_image size="1600" }} 1600w,
+                    {{img_url feature_image size="1200" }} 1200w, 
+                    {{img_url feature_image size="960" }} 960w, 
+                    {{img_url feature_image size="720" }} 720w, 
+                    {{img_url feature_image size="480" }} 480w, 
+                    {{img_url feature_image size="400" }} 400w"
+                    sizes="(max-width: 750px) 100vw, (max-width: 1100px) 73vw, 60vw" 
+                    src="{{img_url feature_image size="2400"}}" 
+                    alt="{{title}} {{t "Post image"}}" />
+            </picture>
+        {{else}}
+            <div class="post-header__img-wrapper">
+                {{>site-logo}}
+            </div>
+        {{/if}}
+
+        <div class="post-header__meta post-header__meta">
+            <div class="post-header__info">
+                <div class="post-authors">                         
+                    {{#foreach authors}}
+                        <a class="author-name-link author-name-link" href="{{@site.url}}{{url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{name}}
+                        </a>
+                    {{/foreach}}
+                </div>
+                <time datetime="{{date format="YYYY-MM-DD"}}" class="post-date">
+                    {{date format="MMM D, YYYY"}}
+                </time>
+                {{#if reading_time}}
+                    <div class="post-reading-time">
+                        {{>icons/timer-icon}}
+                        <span>{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>
+                    </div>
+                {{/if}}
+            </div>
+            <div class="post-header__tags">
+                {{>post-tags showTagsIcons="true"}}
+                {{>post-tags showTags="true"}}
+            </div>
+        </div>
+
+        <div class="post-header__wrapper">
+            <h1 class="post-header__title">
+                {{title}}
+            </h1>
+            {{#if custom_excerpt}}
+                <p class="post-header__excerpt">
+                    {{custom_excerpt}}
+                </p>
+            {{/if}}
+        </div>
+    </div>
+
+    {{else}}
+        <div class="post-header__wrapper">
+            <h1 class="post-header__title">
+                {{title}}
+            </h1>
+            {{#if custom_excerpt}}
+                <p class="post-header__excerpt">
+                    {{custom_excerpt}}
+                </p>
+            {{/if}}
+        </div>
+        {{#if feature_image}}
+        <div class="post-header__img-wrapper">
+            <picture>
+                <source srcset="
+                {{img_url feature_image size="2400" format="webp" }} 2400w, 
+                {{img_url feature_image size="2000" format="webp" }} 2000w, 
+                {{img_url feature_image size="1600" format="webp" }} 1600w, 
+                {{img_url feature_image size="1200" format="webp" }} 1200w, 
+                {{img_url feature_image size="960" format="webp" }} 960w, 
+                {{img_url feature_image size="720" format="webp" }} 720w, 
+                {{img_url feature_image size="480" format="webp" }} 480w, 
+                {{img_url feature_image size="400" format="webp" }} 400w"
+                    sizes="(max-width: 750px) 95vw, (max-width: 1100px) 68vw, 56vw" type="image/webp">
+                <img srcset="
+                {{img_url feature_image size="2400" }} 2400w, 
+                {{img_url feature_image size="2000" }} 2000w, 
+                {{img_url feature_image size="1600" }} 1600w,
+                {{img_url feature_image size="1200" }} 1200w, 
+                {{img_url feature_image size="960" }} 960w, 
+                {{img_url feature_image size="720" }} 720w, 
+                {{img_url feature_image size="480" }} 480w, 
+                {{img_url feature_image size="400" }} 400w"
+                 class="post-header__img"
+                    sizes="(max-width: 750px) 95vw, (max-width: 1100px) 68vw, 56vw" 
+                    src="{{img_url feature_image size="2400"}}" alt="{{title}} {{t "Post image"}}" />
+            </picture>
+        </div>
+        {{/if}}
+
+
+        <div class="post-header__meta post-header__meta--no-featured">
+            <div class="post-header__info">
+                <div class="post-authors">                         
+                    {{#foreach authors}}
+                        <a class="author-name-link author-name-link--no-featured" href="{{@site.url}}{{url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{name}}
+                        </a>
+                    {{/foreach}}
+                </div>
+                <time datetime="{{date format="YYYY-MM-DD"}}" class="post-date">
+                    {{date format="MMM D, YYYY"}}
+                </time>
+                {{#if reading_time}}
+                    <div class="post-reading-time">
+                        {{>icons/timer-icon}}
+                        <span>{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>
+                    </div>
+                {{/if}}
+            </div>
+            <div class="post-header__tags">
+                {{>post-tags showTagsIcons="true"}}
+                {{>post-tags showTags="true"}}
+            </div>
+        </div>
+    {{/if}}
+</header>

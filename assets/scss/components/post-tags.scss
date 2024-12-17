@@ -1,0 +1,111 @@
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	z-index: 99;
+}
+
+.post-tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: $border-radius-tag;
+	padding: 5px 12px;
+	height: 27px;
+
+	background-color: var(--color-bg-block);
+	color: var(--color-text);
+
+	border: 1px solid var(--color-border);
+
+	@include font--tags;
+
+	transition: background-color $transition-time ease,
+		border-color $transition-time ease, color $transition-time ease;
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			border-color: var(--color-border--hover);
+		}
+	}
+}
+
+.post-tag-icons-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.post-tag-icon {
+	width: 28px;
+	height: 28px;
+
+	background-color: #fff;
+	border-radius: $border-radius-tag-icons;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color $transition-time ease,
+		color $transition-time ease, border-color $transition-time ease;
+	position: relative;
+	z-index: 10;
+
+	&__tooltip {
+		color: #fff;
+		background-color: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(15px);
+		display: none;
+		align-items: center;
+		justify-content: center;
+		@include font--semi-12;
+		line-height: 100%;
+		padding: 3px 7px;
+		position: absolute;
+		right: 0;
+		bottom: calc(-100% - 2px);
+		animation: fadeIn 0.35s ease;
+		width: max-content;
+		z-index: 10;
+		border-radius: 4px;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			.post-tag-icon__tooltip {
+				display: flex;
+			}
+		}
+	}
+}
+
+@media (max-width: 1000px) {
+	.post-tag {
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: var(--accent-color);
+				background-color: var(--secondary-color);
+			}
+		}
+	}
+
+	.post-tag-icon {
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				background-color: var(--secondary-color);
+
+				svg {
+					path {
+						fill: var(--accent-color);
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	.post-tag {
+		font-size: 12px;
+	}
+}

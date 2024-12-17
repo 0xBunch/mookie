@@ -1,0 +1,19 @@
+<div class="filter">
+    <div class="filter__header">
+        <h4 class="filter__title">{{t "Tags"}}</h4>
+        <button class="filter__clear-btn" data-tag-filter-url="{{@site.url}}">{{t "Clear All"}}</button>
+    </div>
+    <div class="filter__tags">
+        {{#get "tags" limit="all" filter="slug:-case-study"}}
+            {{#foreach tags}} 
+                <div class="post-tag filter__tag" data-tag-name="{{name}}" data-tag-filter-url="{{@site.url}}{{url}}">
+                    <span class="filter__tag-name">{{name}}</span>
+                    {{>icons/reset-filter-icon}}
+                    <div class="filter__loader">
+                        <div class="filter__spinner"></div>
+                    </div>
+                </div>
+           {{/foreach}} 
+        {{/get}}
+    </div>
+</div>

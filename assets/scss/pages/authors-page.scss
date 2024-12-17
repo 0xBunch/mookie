@@ -1,0 +1,179 @@
+.authors-page {
+  display: flex;
+  flex-grow: 1;
+
+  @include default-scroll-disable;
+}
+
+.authors-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  width: auto;
+
+  margin-left: 32px;
+  margin-right: 32px;
+  margin-top: 32px;
+
+  &__card {
+    width: auto;
+    background-color: var(--color-bg-block);
+    border: 1px solid var(--color-border);
+    border-radius: $border-radius-block;
+
+    transition: background-color $transition-time ease, border-color $transition-time ease;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__card-header {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+
+    transition: border-color $transition-time ease;
+  }
+
+  &__card-img-wrapper {
+    overflow: hidden;
+    border-radius: $border-radius-block;
+
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    picture {
+      width: 100%;
+    }
+
+    &--no-img {
+      background-color: var(--color-bg);
+
+      transition: background-color $transition-time ease;
+    }
+  }
+
+  &__card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__card-name {
+    @include font--titles-H3;
+  }
+
+  &__card-location {
+    @include font--semi-14;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    svg {
+      path {
+        transition: stroke $transition-time ease;
+        stroke: var(--color-text);
+      }
+    }
+  }
+
+  &__card-footer {
+    padding: 24px;
+    margin-top: auto;
+  }
+
+  &__card-bio {
+    @include font--body-M;
+
+    margin-bottom: 10px;
+  }
+
+  &__card-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+
+    color: var(--accent-color);
+
+    @include font--buttons;
+
+    svg {
+      opacity: 0.5;
+      transition: opacity $transition-time ease, rotate $transition-time ease;
+      path {
+        stroke: var(--accent-color);
+      }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        svg {
+          rotate: 45deg;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+:root[data-theme='dark'] {
+  .authors-cards__card-img-wrapper--no-img {
+    svg {
+      path {
+        transition: fill $transition-time ease;
+        fill: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .authors-cards {
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .authors-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1100px) {
+  .authors-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .authors-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .authors-cards {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+  }
+}
