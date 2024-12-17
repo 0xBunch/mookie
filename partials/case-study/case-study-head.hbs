@@ -1,0 +1,45 @@
+<header class="case-study-header">
+    <div class="case-study-header__img-wrapper{{^if feature_image}} case-study-header__img-wrapper--no-img{{/if}}">
+        {{#if feature_image}}
+            <picture>
+                <source 
+                srcset=" 
+                    {{img_url feature_image size="2000" format="webp" }} 2000w, 
+                    {{img_url feature_image size="1600" format="webp" }} 1600w, 
+                    {{img_url feature_image size="1200" format="webp" }} 1200w, 
+                    {{img_url feature_image size="960" format="webp" }} 960w, 
+                    {{img_url feature_image size="720" format="webp" }} 720w, 
+                    {{img_url feature_image size="480" format="webp" }} 480w, 
+                    {{img_url feature_image size="400" format="webp" }} 400w"
+                    sizes="(max-width: 750px) 45vw, (max-width: 1100px) 30vw, 36vw" 
+                    type="image/webp">
+                <img class="case-study-header__img" 
+                srcset="
+                    {{img_url feature_image size="2000" }} 2000w, 
+                    {{img_url feature_image size="1600" }} 1600w,
+                    {{img_url feature_image size="1200" }} 1200w, 
+                    {{img_url feature_image size="960" }} 960w, 
+                    {{img_url feature_image size="720" }} 720w, 
+                    {{img_url feature_image size="480" }} 480w, 
+                    {{img_url feature_image size="400" }} 400w"
+                    sizes="(max-width: 750px) 45vw, (max-width: 1100px) 30vw, 36vw" 
+                    src="{{img_url feature_image size="2000"}}" alt="{{title}} {{t "Case study image"}}" />
+            </picture>
+        {{else}}
+            {{>site-logo}}
+        {{/if}}
+    </div>
+
+    <div class="case-study-header__content-wrapper">
+        <h1 class="case-study-header__title">
+            {{title}}
+        </h1>
+        {{#if custom_excerpt}}
+            <p class="case-study-header__excerpt">
+                {{custom_excerpt}}
+            </p>
+        {{/if}}
+
+        {{>post-tags showTags="true"}}
+    </div>
+</header>

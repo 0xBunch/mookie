@@ -1,0 +1,12 @@
+<div class="read-next-section">
+    <h3 class="read-next-section__title">
+        {{t "Read Next"}}
+    </h3>
+    {{#get "posts" limit = "2" include="tags,authors" filter="id:-{{id}}+tag:case-study" order="published_at desc"}}
+        <div class="posts">
+            {{#foreach posts}}  
+                {{>case-studies/case-study-card}}
+            {{/foreach}}
+        </div>
+    {{/get}}
+</div>
