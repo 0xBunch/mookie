@@ -1,0 +1,120 @@
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        {{#match @custom.header_type "=" 'Header with logo'}}
+            <div class="header-logo">
+                {{>site-logo}}
+
+                <a class="logo logo--resize{{#if @custom.dark_mode_logo }} has-dark-version{{/if}}" href="{{@site.url}}" aria-label="{{@site.url}} {{t "Logo and home page link"}}">
+                    {{#if @custom.resize_logo}}
+                        {{#if @custom.resize_dark_mode_logo}}
+                        <img class="logo__img logo__img--dark" src="{{img_url @custom.resize_dark_mode_logo}}" alt="{{@site.title}} {{t "icon"}}">
+                        {{/if}}
+                        <img class="logo__img logo__img--light" src="{{img_url @custom.resize_logo}}" alt="{{@site.title}} {{t "icon"}}">
+                    {{else}}
+                        <span class="logo__title">{{@site.title.[0]}}</span>
+                    {{/if}}
+                </a>
+            </div>
+        {{/match}}
+        {{#match @custom.header_type "=" 'Header with author'}}
+            {{#get "authors" limit="1"}}
+                {{#if authors}}
+                {{#foreach authors}}
+                <div class="mobile-header-author">
+                    {{#if profile_image}}
+                        <a class="mobile-header-author__image-wrapper-link" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            <picture>
+                                <source srcset="
+                                {{img_url profile_image size="150" format="webp" }} 150w"
+                                    sizes="44px" type="image/webp">
+                                <img class="mobile-header-author__image" srcset="
+                                {{img_url profile_image size="150"}} 150w"
+                                    sizes="44px" src="{{img_url profile_image size="150"}}"
+                                    alt="{{name}} {{t "Profile image"}}" />
+                            </picture>
+                        </a> 
+                    {{else}}
+                        <a class="mobile-header-author__image-wrapper-link" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{>icons/author-default-icon}}
+                        </a>
+                    {{/if}}
+                    <div class="mobile-header-author__content header-author__{{slug}}">
+                        <a class="mobile-header-author__name-link" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                            {{name}}
+                        </a>
+                    </div>
+                </div>
+                {{/foreach}}
+                {{/if}}
+            {{/get}}
+        {{/match}}
+        <button class="mobile-menu-header__close-btn">
+            {{>icons/close-icon}}
+        </button>
+    </div>
+    <div class="mobile-menu__wrapper">
+        <nav class="nav">
+            <ul class="nav-list nav-list--primary">
+                {{#foreach navigation}}
+                    {{#match url "=" "#"}}
+                        <li class="nav-submenu-item" data-nav-slug="{{slug}}">
+                            <button class="nav-submenu-btn nav-submenu-btn__{{slug}}" aria-label="{{t "Open submenu"}} {{label}}" id="submenu-button-{{label}}-{{@index}}">
+                                <span class="nav-submenu-btn__container">
+                                    <span class="nav-submenu__full-char">{{label}}</span>
+                                    {{>icons/submenu-chevron-icon}}
+                                </span>
+                            </button>
+                            <ul class="submenu">
+                    {{else match label.[0] "=" "-"}}
+                                <li class="submenu__item">
+                                    <a class="submenu__item-link" href="{{url absolute="true"}}" aria-label="{{label}} {{t "Navigation link"}}">
+                                        <span class="nav-submenu__full-char">{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}</span>
+                                    </a>
+                                </li>
+                    {{else match label.[0] "=" "+"}}
+                                <li class="submenu__item">
+                                    <a class="submenu__item-link" href="{{url absolute="true"}}" aria-label="{{label}} {{t "Navigation link"}}">
+                                        <span class="nav-submenu__full-char">{{#foreach label as |charLabel|}}{{#match @index '>' '1'}}{{charLabel}}{{/match}}{{/foreach}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {{else}}
+                        <li class="nav-item{{#if current}} nav-item--current{{/if}}" data-nav-slug="{{slug}}">
+                            <a href="{{url absolute="true"}}" class="nav-item__link nav-item__{{slug}}" aria-label="{{label}} {{t "Navigation link"}}">
+                                <span class="nav-item__full-char">{{label}}</span>
+                            </a>
+                        </li>
+                    {{/match}}
+                {{/foreach}}
+            </ul>
+        </nav>
+
+        {{navigation type="secondary"}}
+
+        <div class="header-social">
+            {{#if @site.facebook}}
+                <a class="header-social__link" href={{facebook_url}} target="_blank" rel="noopener noreferrer" aria-label="{{@site.title}} {{t "facebook link"}}">
+                    <span>{{t "Facebook"}}</span>
+                    {{>icons/social-link-icon}}
+                </a>
+            {{/if}}
+            {{#if @site.twitter}}
+                <a class="header-social__link" href={{twitter_url}} target="_blank" rel="noopener noreferrer" aria-label="{{@site.title}} {{t "twitter link"}}">
+                    <span>{{t "X"}}</span>
+                    {{>icons/social-link-icon}}
+                </a>
+            {{/if}}
+        </div>
+        {{#if @member}}
+            <a href="{{@site.url}}/account" class="btn" aria-label="{{t "Account page link"}}">
+                {{t "Account"}}
+            </a>
+        {{else}}
+            <a href="{{@site.url}}/signin" class="btn" aria-label="{{t "Sign In link"}}">
+                {{t "Sign In"}}
+                {{>icons/button-icon}}
+            </a>
+        {{/if}}
+    </div>
+</div>

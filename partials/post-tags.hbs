@@ -1,0 +1,52 @@
+{{#match showTagsIcons "=" "true"}}
+    {{#if featured}}
+    <div class="post-tag-icons-wrapper">
+    {{else}}
+    {{^match visibility "=" 'public'}}
+    <div class="post-tag-icons-wrapper">
+    {{/match}}
+    {{/if}}
+        {{#if featured}}
+        <div class="post-tag-icon featured-tag" role="note" aria-label="{{t "Featured tag"}}">
+            {{>icons/lightning-icon}}
+            <div class="post-tag-icon__tooltip">
+                <span class="post-tag-icon__tooltip-span">{{t "Featured"}}</span>
+            </div>
+        </div>
+        {{/if}}
+        {{^match visibility "=" 'public'}}
+        <div class="post-tag-icon private-tag" role="note" aria-label="{{t "For members only tag"}}">
+            {{>icons/lock-icon}}
+            <div class="post-tag-icon__tooltip">
+                <span class="post-tag-icon__tooltip-span">
+                    {{#match visibility "=" "members"}}
+                        {{t "Only for members"}}
+                    {{/match}}
+                    {{#match visibility "=" "paid"}}
+                        {{t "Only for paid members"}}
+                    {{/match}}
+                    {{#match visibility "=" "tiers"}}
+                       {{t "For specific tier(s) members"}}
+                    {{/match}}
+                </span>
+            </div>
+        </div>
+        {{/match}}
+    {{#if featured}}
+    </div>
+    {{else}}
+    {{^match visibility "=" 'public'}}
+    </div>
+    {{/match}}
+    {{/if}}
+{{/match}}
+
+{{#match showTags "=" "true"}}
+    <div class="post-tags">
+        {{#foreach tags}}
+            <a class="post-tag" href="{{url}}" aria-label="{{name}} {{t "tag"}}">
+                {{name}}
+            </a>
+        {{/foreach}}
+    </div>
+{{/match}}

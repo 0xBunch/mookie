@@ -1,0 +1,77 @@
+<header class="mobile-header">
+    {{#match @custom.header_type "=" 'Header with logo'}}
+        <div class="header-logo">
+            {{>site-logo}}
+
+            <a class="logo logo--resize{{#if @custom.dark_mode_logo}} has-dark-version{{/if}}" href="{{@site.url}}" aria-label="{{@site.url}} {{t "Logo and home page link"}}">
+                {{#if @custom.resize_logo}}
+                    {{#if @custom.resize_dark_mode_logo}}
+                    <img class="logo__img logo__img--dark" src="{{img_url @custom.resize_dark_mode_logo}}" alt="{{@site.title}} {{t "icon"}}">
+                    {{/if}}
+                    <img class="logo__img logo__img--light" src="{{img_url @custom.resize_logo}}" alt="{{@site.title}} {{t "icon"}}">
+                {{else}}
+                    <span class="logo__title">{{@site.title.[0]}}</span>
+                {{/if}}
+            </a>
+        </div>
+    {{/match}}
+    {{#match @custom.header_type "=" 'Header with author'}}
+        {{#get "authors" limit="1"}}
+            {{#if authors}}
+            {{#foreach authors}}
+            <div class="mobile-header-author">
+                {{#if profile_image}}
+                    <a class="mobile-header-author__image-wrapper-link" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                        <picture>
+                            <source srcset="
+                            {{img_url profile_image size="150" format="webp" }} 150w"
+                                sizes="44px" type="image/webp">
+                            <img class="mobile-header-author__image" srcset="
+                            {{img_url profile_image size="150"}} 150w"
+                                sizes="44px" src="{{img_url profile_image size="150"}}"
+                                alt="{{name}} {{t "Profile image"}}" />
+                        </picture>
+                    </a> 
+                {{else}}
+                    <a class="mobile-header-author__image-wrapper-link" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                        {{>icons/author-default-icon}}
+                    </a>
+                {{/if}}
+                <div class="mobile-header-author__content">
+                    <a class="mobile-header-author__name-link" id="{{slug}}" href="{{@site.url}}" aria-label="{{t "Link to page author {authorName}" authorName=name}}">
+                        {{name}}
+                    </a>
+                </div>
+            </div>
+            {{/foreach}}
+            {{/if}}
+        {{/get}}
+    {{/match}}
+    <div class="mobile-header-options">
+        <div class="mobile-header-options__elements">
+            <button class="search-btn" title="{{t "Search button"}}" aria-label="{{t "Search button"}}" data-ghost-search>
+                {{>icons/search-icon}}
+            </button>
+            <button class="switch-theme-btn" aria-label="{{t "Dark mode toggle button"}}">
+                <span class="switch-theme-btn__wrapper">
+                    <span class="switch-theme-btn__mod switch-theme-btn__mod--light">
+                        {{>icons/sun-icon}}
+                    </span>
+                    <span class="switch-theme-btn__mod switch-theme-btn__mod--dark">
+                        {{>icons/moon-icon}}  
+                    </span>
+                </span>
+            </button>
+        </div>
+        {{#if @member}}
+            <a href="{{@site.url}}/account" class="btn" aria-label="{{t "Account page link"}}">
+                {{t "Account"}}
+            </a>
+        {{else}}
+            <a href="{{@site.url}}/signin" class="btn" aria-label="{{t "Sign In link"}}">
+                {{t "Sign In"}}
+                {{>icons/button-icon}}
+            </a>
+        {{/if}}
+    </div>
+</header>
